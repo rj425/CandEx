@@ -1,0 +1,41 @@
+<cardContainer 
+    cardTitle="This Week Interviews" 
+    width="604px"
+    height="250px"
+    (refreshEvent)="refreshComponent($event)">
+    <div card-content>
+        <div *ngIf="jsonResponse.length==0" class="informationMessage">
+            <span>No Interviews this week!</span>
+        </div>    
+        <table class="table" *ngIf="jsonResponse.length>0">
+            <thead>
+                <tr>
+                    <th>Candidate Name</th>
+                    <th>Level</th>
+                    <th>Round</th>
+                    <th>Interview Date</th>
+                    <th>Start Time</th>
+                    <th>Finish Time</th>
+                    <th>Panel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let x of jsonResponse">
+                    <td>{{x.candidateName}}</td>
+                    <td>{{x.levelName}}</td>
+                    <td>{{x.roundName}}</td>
+                    <td>{{x.interviewDate}}</td>
+                    <td>{{x.startTime}}</td>
+                    <td>{{x.finishTime}}</td>
+                    <td>
+                        <ul *ngFor="let panel of x.panel">
+                            <li>
+                            {{panel}}
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</cardContainer>

@@ -1,0 +1,10 @@
+.label{
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+    display:flex;
+    flex-direction:column;
+}
+
+/deep/ .mat-dialog-container{
+	border-radius: 12px;
+    
+}

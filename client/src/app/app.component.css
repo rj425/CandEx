@@ -1,0 +1,22 @@
+mat-progress-bar{
+	position: fixed;
+	z-index: 3;
+	height: 4px;
+}
+	
+.navSpacer{
+	margin-top: 48px;
+}
+
+.routerOutletContainer{
+	width: 82%;
+}
+
+.mainContainer{
+	display: flex;
+	flex-direction: row;
+}
+
+.sideContainer{
+	width: 18% !important;
+}

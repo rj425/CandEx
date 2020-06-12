@@ -1,0 +1,127 @@
+.interviewRoundContainer{
+  display: flex;
+  flex-direction: column;
+  background: #f9f9f9;
+  width: 95%;
+  border-radius: 5px;
+  padding: 2.5%;
+  font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 15px;
+}
+
+.roundFormContainer{
+  background: #ffffff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 10px;
+}
+
+.interviewRoundHeader{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.roundHeadings{
+  display: flex;
+  flex-direction: column;
+  color: #7e7e7e;
+}
+
+.subHeading1{
+    align-self: flex-start;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 2px;
+}
+
+.subHeading2{
+}
+
+.spacer {
+/*    flex: flex-grow flex-shrink flex-basis*/
+    flex: 1 1 auto;
+}
+
+.roundIcons mat-icon{
+  color: #7e7e7e;
+}
+
+mat-icon.mat-icon.material-icons:hover{
+  cursor: pointer;
+}
+
+.roundContent{
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+.roundFields{
+  width: 200px;
+}
+
+.roundFormFields{
+  width: 120px;
+}
+
+
+.row{
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.submitButton{
+  margin-top: 15px;
+}
+
+mat-form-field.selectPanellists{
+  width: 100%;
+}
+
+.roundButtons{
+  display: flex;
+  flex-direction: row;
+}
+
+.roundButtons button{
+  flex-direction: 1 0 0;
+  margin-right: 5px;
+}
+
+.informationContainer{
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  color: #909090;
+}
+
+.informationContainer span{
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.informationContainer .heading1{
+  font-size: 20px;
+  color: #747474;
+}
+
+.mailSliderDiv{
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.spacer{
+  flex:1 1 auto;
+}

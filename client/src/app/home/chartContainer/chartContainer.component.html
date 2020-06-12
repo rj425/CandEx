@@ -1,0 +1,77 @@
+<div class="card"          
+     (window:resize)="onResize()" 
+     [style.width]="width"
+     [style.height]="height"
+     [style.background]="backgroundColor"
+     [style.color]="fontColor"
+     [ngStyle]="fullScreenStyle">
+    <div class="chartView" #card>
+        <div class="card-header">
+            <span class="title">
+                {{chartTitle}}
+            </span>
+            <span class="spacer"></span>
+            <span class="buttonPanel">
+<!--                 <i class="material-icons right" (click)="printComponent()">print</i> -->
+                <i class="material-icons right"
+                    *ngIf="!fullScreenFlag" 
+                   (click)="switchToFullScreen()">fullscreen
+                </i>
+                <i class="material-icons right"
+                    *ngIf="fullScreenFlag"
+                    (click)="switchToFullScreen()">fullscreen_exit
+                </i>
+                <i class="material-icons right" (click)="refreshComponent($event)">refresh</i>
+                <i class="material-icons right" (click)="showFilterView()" *ngIf="showFilterIcon">filter_list</i>
+                <i class="material-icons right" (click)="showDataTableView()">more_vert</i>
+            </span>
+        </div>
+        <div class="card-body">
+            <ng-content select="[chart]" ></ng-content>
+        </div>
+    </div>
+    <div class="dataTableView"
+        [@toggleView]="showDataTableViewFlag">
+        <div class="card-header">
+            <span class="title">
+                {{dataTableTitle}}
+            </span> 
+            <span class="spacer"></span>
+            <span class="buttonPanel">
+                <i class="material-icons right"
+                    *ngIf="!fullScreenFlag" 
+                   (click)="switchToFullScreen()">fullscreen
+                </i>
+                <i class="material-icons right"
+                    *ngIf="fullScreenFlag"
+                    (click)="switchToFullScreen()">fullscreen_exit
+                </i>
+                <i class="material-icons right"
+                   (click)="showChartView()">show_chart
+                </i>
+<!--                 <i class="material-icons right">file_download</i> -->
+            </span>
+        </div>
+        <div class="card-body table-body">
+            <ng-content select="[dataTable]"></ng-content>
+        </div>
+    </div>
+    <div class="filterView"
+        [@toggleView]="showFilterViewFlag">
+        <div class="card-header">
+            <span class="title">
+                {{filterTitle}}
+            </span>
+            <span class="spacer"></span>
+            <span class="buttonPanel">
+                <i class="material-icons right"
+                   (click)="showChartView()">save
+                </i>
+            </span>
+        </div>
+        <div class="card-body filter-body">
+            <ng-content select="[chartFilters]"></ng-content>
+        </div>
+    </div>
+</div>
+            

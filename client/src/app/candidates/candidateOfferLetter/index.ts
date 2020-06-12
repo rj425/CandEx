@@ -1,0 +1,1 @@
+export * from './candidateOfferLetter.component'

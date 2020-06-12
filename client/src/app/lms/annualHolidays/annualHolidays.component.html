@@ -1,0 +1,54 @@
+<br><br>
+<div >
+	<div class="row">
+		<div class="col s9"><h2>Annual Holidays</h2></div>
+    <br>
+	</div>
+	<div class="row">
+		<div class="col l2 s12">
+			<label for="totalHolidays">Total Number of Holidays</label>
+			<input type="number" id="totalHolidays" class="validate" [(ngModel)]="totalHolidays">
+		</div>
+		<div class="col l1 s12">
+			<i class="material-icons icon" (click)="updateLength()">send</i>
+		</div>
+	</div>
+
+	<div class="row">
+	<form [formGroup]="holidayForm" *ngIf="showForm">
+    <div formArrayName="holidays">
+
+        <div class="row sub-header" >
+            <div class="col l2"><h3>Serial Number</h3></div>
+            <div class="col l4"><h3>Holiday</h3></div>
+            <div class="col l3"><h3>Date</h3></div>
+        </div>
+
+        <div *ngFor="let holiday of holidayForm.controls.holidays.controls;let i=index">
+            <div formGroupName={{i}}>
+                <div class="row">
+                	<div class="col l2"><h3>{{i+1}}</h3></div>
+                    <div class="col l4 inputField">
+                    	<input type="text" class="validate"></div>
+                    <div class="col l3 inputField">                    
+                        <input type="date" class="validate" formControlName="holidayDate"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+    <div class="col l9">
+        <button type="submit" 
+                class="btn cyan darken-2 right" 
+                type="submit" 
+                (click)="onSubmit()"
+                >
+                Save
+                
+        </button>
+    </div>
+    </div>
+    </form>
+	</div>
+</div>

@@ -1,0 +1,74 @@
+.table thead tr th, .table tbody tr td {
+    text-align: center;
+}
+
+.table td, .table th {
+    padding: 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: 2px;
+    font-size: 14px;
+}
+
+.table, th, .table td {
+    border: none;
+}
+
+.table th {
+    padding: 5px;
+}
+
+.table th {
+    font-weight: bold;
+    text-align: center;
+}
+
+.table td, .table th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
+.table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.table {
+
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+.table tbody tr:nth-child(odd){
+    background-color: rgba(0,0,0,0.05);
+}
+
+
+svg.nvd3-svg{
+    margin: auto !important;
+}
+
+.candidateIDsList{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.candidateIDsList li {list-style-type: none;}
+
+.candidateIDsList a{
+    color: darkblue;
+}
+
+.candidateIDsList a:visited {
+    color: green;
+}
+
+.candidateIDsList a:hover {
+    cursor: pointer;
+    color: blue;
+}

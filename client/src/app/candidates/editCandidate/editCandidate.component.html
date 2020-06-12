@@ -1,0 +1,644 @@
+<div class="container">
+	<span class="mainHeading">View & Edit Candidate Information</span>
+    <br>
+	<mat-tab-group [selectedIndex]="selectedIndex">
+		<mat-tab label="PERSONAL">
+			<div class="formContainer">
+				<div class="spinnerContainer" *ngIf="!candidate">
+					<mat-progress-spinner color="primary"
+	        							mode="indeterminate">
+	   				</mat-progress-spinner>
+	   			</div>
+				<form [formGroup]="candidatePersonalForm"
+					  *ngIf="candidate"> 
+ 					<div class="buttonPanel">
+						<button mat-raised-button class="resetButton" 	
+								*ngIf="candidatePersonalForm.enabled"
+								(click)="resetForm(candidatePersonalForm)"
+						        >Reset
+						</button>
+						<span>&nbsp;</span>
+						<button mat-raised-button color="primary" 
+								*ngIf="candidatePersonalForm.enabled"
+								(click)="cancelEditMode(candidatePersonalForm)"
+						        >Cancel
+						</button>
+						<span class="spacer"></span>
+						<button mat-raised-button
+								*ngIf="candidatePersonalForm.enabled"						
+						        color="primary"
+						        (click)="onSubmit(candidatePersonalForm,false)">Save & Continue
+						</button>
+						<span>&nbsp;</span>
+						<button mat-raised-button type="submit"
+								*ngIf="candidatePersonalForm.enabled"
+								(click)="onSubmit(candidatePersonalForm,true)"
+						        color="primary">Save
+						</button>
+						<button mat-raised-button type="submit" 
+								*ngIf="candidatePersonalForm.disabled"
+								(click)="enableForm(candidatePersonalForm)"
+						        color="primary">Edit Personal Details
+						</button>			
+					</div>
+ 					<div class="fieldsPanel">				
+						<div class="row">
+			                <mat-form-field class="personalFormFields">
+			                    <input matInput placeholder="First Name" type="text"
+			                    formControlName="firstName">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="personalFormFields">
+			                    <input matInput placeholder="Last Name" type="text"
+								formControlName="lastName">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="personalFormFields">
+				                <mat-select placeholder="Gender" formControlName="gender">
+				                    <mat-option value=null disabled="true">Select Gender</mat-option>
+									<mat-option [value]="gender" *ngFor="let gender of genders">{{gender}}</mat-option>
+				                </mat-select>
+				             </mat-form-field>
+			            </div>
+			            <div class="row">
+			                <mat-form-field class="personalFormFields">
+			                	<span matPrefix>+91 &nbsp;</span>
+			                    <input matInput placeholder="Mobile" type="number" 	
+			                    	formControlName="mobile">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="personalFormFields">
+			                    <input matInput placeholder="Email" type="text" 
+			                    	formControlName="email">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="personalFormFields">
+			                    <input matInput 
+			                    	[matDatepicker]="picker" placeholder="Date Of Birth"
+			                    	formControlName="dateOfBirth">
+			                    <mat-datepicker-toggle matSuffix [for]="picker"
+			                    					  [disabled]="candidatePersonalForm.disabled">
+			                    </mat-datepicker-toggle>
+			                    <mat-datepicker #picker></mat-datepicker>
+			                </mat-form-field>		            	
+			            </div>	
+			            <div class="row">
+			                <mat-form-field class="personalFormFields">
+			                    <input matInput placeholder="Current City" type="text"
+			                    	formControlName="currentAddress">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="personalFormFields">
+			                    <input matInput placeholder="Permanent City" type="text" 
+			                    	formControlName="permanentAddress">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <div class="personalFormFields">
+			                </div>		            	
+			            </div>	
+			        </div>    					
+				</form>
+			</div>
+		</mat-tab>
+		<mat-tab label="EDUCATIONAL" active="true">
+			<div class="formContainer">
+				<form [formGroup]="candidateEducationForm" *ngIf="candidate">
+ 					<div class="buttonPanel">
+						<button mat-raised-button class="resetButton" 	
+								*ngIf="candidateEducationForm.enabled"
+								(click)="resetForm(candidateEducationForm)"
+						        >Reset
+						</button>
+						<span>&nbsp;</span>
+						<button mat-raised-button color="primary" 
+								*ngIf="candidateEducationForm.enabled"
+								(click)="cancelEditMode(candidateEducationForm)"
+						        >Cancel
+						</button>
+						<span class="spacer"></span>
+						<button mat-raised-button
+								*ngIf="candidateEducationForm.enabled"
+								color="primary"
+								(click)="addEducationRow()">
+								Add Row
+						</button>
+						<span>&nbsp;</span>
+						<button mat-raised-button
+								*ngIf="candidateEducationForm.enabled"						
+						        color="primary"
+						        (click)="onSubmit(candidateEducationForm,false)">Save & Continue
+						</button>
+						<span>&nbsp;</span>
+						<button mat-raised-button type="submit"
+								*ngIf="candidateEducationForm.enabled"
+								(click)="onSubmit(candidateEducationForm,true)"
+						        color="primary">Save
+						</button>
+						<button mat-raised-button type="submit" 
+								*ngIf="candidateEducationForm.disabled"
+								(click)="enableForm(candidateEducationForm)"
+						        color="primary">Edit Educational Details
+						</button>			
+					</div>
+					<div class="fieldsPanel">
+				        <div formArrayName="education" class="section">
+				            <div *ngFor="let educationRow of candidateEducationForm.controls.education.controls; let i=index">
+				                <div formGroupName={{i}}>
+				                    <div class="row">
+				                    	<mat-form-field class="educationFormFields">
+					                        <mat-select placeholder="Institution" formControlName="institutionName">
+					                            <mat-option value=null disabled="true">Select Institution</mat-option>
+					                            <mat-option [value]="institution.institutionName" 
+					                                    *ngFor="let institution of institutionList">
+					                                    {{ institution.institutionName}}
+					                            </mat-option>
+					                        </mat-select>
+					                    </mat-form-field>
+				                        <span class="spacer"></span>
+				                        <mat-form-field class="educationFormFields">
+					                        <mat-select placeholder="Course" formControlName="courseName">
+					                            <mat-option value=null disabled="true">Select Course</mat-option>
+					                            <mat-option [value]="course.courseName" 
+					                                    *ngFor="let course of courseList">
+					                                    {{ course.courseName }}
+					                            </mat-option>
+					                        </mat-select>
+					                    </mat-form-field>                
+				                        <span class="spacer"></span>
+				                        <mat-form-field class="educationFormFields">
+					                        <mat-select placeholder="Type" formControlName="graduationType">
+					                            <mat-option value=null disabled="true">Select type</mat-option>
+					                            <mat-option [value]="type" *ngFor="let type of graduationType">{{type}}</mat-option>
+					                        </mat-select>
+					                    </mat-form-field>
+				                        <span class="spacer"></span>
+				                        <mat-form-field class="educationFormFields">
+				                            <input matInput placeholder="GPA" type="number" class="validate" 
+				                                   step="0.01" formControlName="gpa">
+				                        </mat-form-field>
+				                        <span class="spacer"></span>
+				                        <mat-form-field class="educationFormFields">
+				                            <input matInput placeholder="Year" type="number" class="validate" 
+				                                   formControlName="graduationYear">
+				                        </mat-form-field>
+				                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				                        <mat-icon class="removeIcon" matTooltip="Remove Row" 
+				                        		*ngIf="candidateEducationForm.enabled"
+				                                (click)="removeEducationRow(i)">remove_circle
+				                        </mat-icon>                 
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+					</div>					
+				</form>
+			</div>		
+		</mat-tab>
+		<mat-tab label="PROFESSIONAL">
+			<div class="formContainer">
+				<form [formGroup]="candidateProfessionalForm"
+					  *ngIf="candidate"> 
+ 					<div class="buttonPanel">
+						<button mat-raised-button class="resetButton" 	
+								*ngIf="candidateProfessionalForm.enabled"
+								(click)="resetForm(candidateProfessionalForm)"
+						        >Reset
+						</button>
+						<span>&nbsp;</span>
+						<button mat-raised-button color="primary" 
+								*ngIf="candidateProfessionalForm.enabled"
+								(click)="cancelEditMode(candidateProfessionalForm)"
+						        >Cancel
+						</button>
+						<span class="spacer"></span>
+						<button mat-raised-button
+								*ngIf="candidateProfessionalForm.enabled"						
+						        color="primary"
+						        (click)="onSubmit(candidateProfessionalForm,false)">Save & Continue
+						</button>
+						<span>&nbsp;</span>
+						<button mat-raised-button type="submit"
+								*ngIf="candidateProfessionalForm.enabled"
+								(click)="onSubmit(candidateProfessionalForm,true)"
+						        color="primary">Save
+						</button>
+						<button mat-raised-button type="submit" 
+								*ngIf="candidateProfessionalForm.disabled"
+								(click)="enableForm(candidateProfessionalForm)"
+						        color="primary">Edit Professional Details
+						</button>			
+					</div>
+ 					<div class="fieldsPanel">				
+						<div class="row">
+			                <mat-form-field class="professionalFormFields">
+			                    <input matInput placeholder="Current Employer" type="text"
+			                    formControlName="currentEmployer">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="professionalFormFields">
+			                    <input matInput placeholder="Current Designation" type="text"
+								formControlName="currentDesignation">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="professionalFormFields">
+			                    <input matInput placeholder="Current CTC" type="number"
+								formControlName="currentCTC">
+			                </mat-form-field>
+			            </div>
+			            <div class="row">
+			                <mat-form-field class="professionalFormFields">
+			                    <input matInput placeholder="Experience(in years)" type="number" 	
+			                    	formControlName="experienceYear">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="professionalFormFields">
+			                    <input matInput placeholder="Experience(in monnths)" type="number" 
+			                    	formControlName="experienceMonth">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <div class="professionalFormFields">
+			                </div>		            	
+			            </div>
+			        </div>    					
+				</form>
+			</div>
+		</mat-tab>
+		<mat-tab label="PROCESS">
+			<div class="formContainer">
+				<form [formGroup]="candidateProcessForm"
+					  *ngIf="candidate"> 
+ 					<div class="buttonPanel">
+						<button mat-raised-button class="resetButton" 	
+								*ngIf="candidateProcessForm.enabled"
+								(click)="resetForm(candidateProcessForm)"
+						        >Reset
+						</button>
+						<span>&nbsp;</span>
+						<button mat-raised-button color="primary" 
+								*ngIf="candidateProcessForm.enabled"
+								(click)="cancelEditMode(candidateProcessForm)"
+						        >Cancel
+						</button>
+						<span class="spacer"></span>
+						<button mat-raised-button
+								*ngIf="candidateProcessForm.enabled"						
+						        color="primary"
+						        (click)="onSubmit(candidateProcessForm,false)">Save & Continue
+						</button>
+						<span>&nbsp;</span>
+						<button mat-raised-button type="submit"
+								*ngIf="candidateProcessForm.enabled"
+								(click)="onSubmit(candidateProcessForm,true)"
+						        color="primary">Save
+						</button>
+						<button mat-raised-button type="submit" 
+								*ngIf="candidateProcessForm.disabled"
+								(click)="enableForm(candidateProcessForm)"
+						        color="primary">Edit Process Details
+						</button>			
+					</div>
+ 					<div class="fieldsPanel">				
+						<div class="row">
+			                <mat-form-field class="processFormFields">
+								<input matInput 
+			                    	[matDatepicker]="picker" placeholder="Process Start Date"
+			                    	formControlName="processStartDate">
+			                    <mat-datepicker-toggle matSuffix [for]="picker"
+			                    					  [disabled]="candidateProcessForm.disabled">
+			                    </mat-datepicker-toggle>
+			                    <mat-datepicker #picker></mat-datepicker>
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="processFormFields">
+			                    <input matInput placeholder="Process Start Time" type="time"
+								formControlName="processStartTime">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="processFormFields">
+			                    <input matInput placeholder="Process Status" type="text" 
+			                    [value]="candidate.process.processStatus" disabled="true">
+			                    <mat-hint align="end">Handled By CandEx</mat-hint>
+			                </mat-form-field>
+			            </div>
+			            <div class="row">
+			                <mat-form-field class="processFormFields">
+			                    <input matInput placeholder="Last Interview Status" 
+			                    		type="text" 	
+			                    	formControlName="lastInterviewStatus">
+			                </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="processFormFields">
+				                <mat-select placeholder="Title" formControlName="title">
+				                    <mat-option value=null disabled="true">Select Title</mat-option>
+				                    <mat-option [value]="designation.designation" 
+				                             *ngFor="let designation of designationList">
+				                            {{ designation.designation }}
+				                    </mat-option>
+				                </mat-select>
+				            </mat-form-field>
+			                <span class="spacer"></span>
+			                <mat-form-field class="processFormFields">
+				                <mat-select placeholder="Team" formControlName="team">
+				                    <mat-option value=null disabled="true">Select Team</mat-option>
+				                    <mat-option [value]="department.departmentName" 
+				                             *ngFor="let department of departmentList">
+				                            {{ department.departmentName }}
+				                    </mat-option>
+				                </mat-select>	            	
+				            </mat-form-field>
+			            </div>
+			            <div class="row">
+			            	<mat-form-field class="processFormFields">
+	                			<mat-select placeholder="Source" formControlName="source">
+				                    <mat-option value=null disabled="true">Select Source</mat-option>
+				                    <mat-option [value]="source.source" 
+				                             *ngFor="let source of sourceList">
+				                            {{ source.source }}
+				                    </mat-option>
+	            		    	</mat-select>			            
+	            		   	</mat-form-field>	
+			            </div>
+			        </div>    					
+				</form>
+			</div>
+		</mat-tab>
+	<mat-tab label="OFFER & COST">
+			<div *ngIf="candidate">
+				<div *ngIf="!showCandidateOfferForm" class="informationContainer">
+					<span>{{candidate.personal.firstName}} {{candidate.personal.lastName}} hasn't been offered yet.</span>
+				</div>		
+				<div class="formContainer" *ngIf="showCandidateOfferForm">
+					<form [formGroup]="candidateOfferForm"
+						  *ngIf="candidate"> 
+	 					<div class="buttonPanel">
+							<button mat-raised-button class="resetButton" 	
+									*ngIf="candidateOfferForm.enabled"
+									(click)="resetForm(candidateOfferForm)"
+							        >Reset
+							</button>
+							<span>&nbsp;</span>
+							<button mat-raised-button color="primary" 
+									*ngIf="candidateOfferForm.enabled"
+									(click)="cancelEditMode(candidateOfferForm)"
+							        >Cancel
+							</button>
+							<span class="spacer"></span>
+							<button mat-raised-button
+									*ngIf="candidateOfferForm.enabled"						
+							        color="primary"
+							        (click)="onSubmit(candidateOfferForm,false)">Save & Continue
+							</button>
+							<span>&nbsp;</span>
+							<button mat-raised-button type="submit"
+									*ngIf="candidateOfferForm.enabled"
+									(click)="onSubmit(candidateOfferForm,true)"
+							        color="primary">Save
+							</button>
+							<button mat-raised-button type="submit" 
+									*ngIf="candidateOfferForm.disabled"
+									(click)="enableForm(candidateOfferForm)"
+							        color="primary">Edit Offer Details
+							</button>			
+						</div>
+	 					<div class="fieldsPanel">				
+							<div class="row">
+				                <mat-form-field class="offerFormFields">
+									<input matInput 
+				                        placeholder="Hiring Decision Date"
+				                        [ngModel]="candidate.offer.hiringDecisionDate"
+				                        [ngModelOptions]="{standalone: true}"
+				                    	disabled 
+				                    	>
+
+				                </mat-form-field>
+				                <span class="spacer"></span>
+				               	<mat-form-field class="offerFormFields">
+									<input matInput 
+				                    	[matDatepicker]="picker2" 
+				                    	[min]="candidateOfferForm.value.hiringDecisionDate"
+				                    	placeholder="Offer Date"
+				                    	formControlName="offerDate">
+				                    <mat-datepicker-toggle matSuffix [for]="picker2"
+				                    					  [disabled]="candidateOfferForm.disabled">
+				                    </mat-datepicker-toggle>
+				                    <mat-datepicker #picker2></mat-datepicker>
+				                </mat-form-field>
+				                <span class="spacer"></span>
+				                <mat-form-field class="offerFormFields">
+									<input matInput 
+				                    	[matDatepicker]="picker3" 
+				                    	[min]="candidateOfferForm.value.hiringDecisionDate"
+				                    	placeholder="Joining Date"
+				                    	formControlName="joiningDate">
+				                    <mat-datepicker-toggle matSuffix [for]="picker3"
+				                    					  [disabled]="candidateOfferForm.disabled">
+				                    </mat-datepicker-toggle>
+				                    <mat-datepicker #picker3></mat-datepicker>
+				                </mat-form-field>
+				            </div>
+				            <div class="row">
+				          		<mat-form-field class="offerFormFields">
+				                    <input matInput placeholder="Offer Time Taken" 
+				                    		type="number" 	
+				                    		[value]="candidate.offer?candidate.offer.offerTT:''"
+				                    		[disabled]="true">
+				                    <mat-hint align="end">Handled By CandEx</mat-hint>
+				                </mat-form-field>
+				                <span class="spacer"></span>
+				                <mat-form-field class="offerFormFields">
+				                	<mat-select placeholder="Offer Status" formControlName="offerStatus">
+					                    <mat-option value=null disabled="true">Set offer status</mat-option>
+					                    <mat-option  value="Accepted">Accepted</mat-option>
+					          			<mat-option value="Declined">Declined</mat-option>
+					          			<mat-option value="onHold">On Hold</mat-option>
+		            		    	</mat-select>
+								</mat-form-field>  
+								<span class="spacer"></span>
+								<div class="offerFormFields"></div>
+							</div>
+	 				    </div>    					
+					</form>
+					 
+					
+				    <!--	<form [formGroup]="candidateCostForm"
+						  *ngIf="candidate"> 
+	 					<div class="buttonPanel">
+							<button mat-raised-button class="resetButton" 	
+									*ngIf="candidateCostForm.enabled"
+									(click)="resetForm(candidateCostForm)"
+							        >Reset
+							</button>
+							<span>&nbsp;</span>
+							<button mat-raised-button color="primary" 
+									*ngIf="candidateCostForm.enabled"
+									(click)="cancelEditMode(candidateCostForm)"
+							        >Cancel
+							</button>
+							<span class="spacer"></span>
+							<button mat-raised-button
+									*ngIf="candidateCostForm.enabled"						
+							        color="primary"
+							        (click)="onSubmit(candidateCostForm,false)">Save & Continue
+							</button>
+							<span>&nbsp;</span>
+							<button mat-raised-button type="submit"
+									*ngIf="candidateCostForm.enabled"
+									(click)="onSubmit(candidateCostForm,true)"
+							        color="primary">Save
+							</button>
+							<button mat-raised-button type="submit" 
+									*ngIf="candidateCostForm.disabled"
+									(click)="enableForm(candidateCostForm)"
+							        color="primary">Edit Candidate Cost Details
+							</button>			
+						</div>
+	 					<div class="fieldsPanel">				
+							<div class="row">
+				                <mat-form-field class="costFormFields">
+									<input matInput 
+				                        placeholder="Relocation Cost"
+				                        type="number"
+				                        formControlName="relocationCost"
+				                    	>
+								</mat-form-field>
+				                <span class="spacer"></span>
+				               	<mat-form-field class="costFormFields">
+									<input matInput placeholder="Settling-in Cost" type="number" formControlName="settlingCost">
+				                </mat-form-field>
+				                <span class="spacer"></span>
+				               	<mat-form-field class="costFormFields">
+									<input matInput placeholder="Joining Bonus" type="number" formControlName="joiningBonus">
+				                </mat-form-field>
+				            </div>
+							<div class="row">
+				                <mat-form-field class="costFormFields">
+									<input matInput placeholder="Salary" type="number" formControlName="salary">
+								</mat-form-field>
+				                <span class="spacer"></span>
+				               	<mat-form-field class="costFormFields">
+									<input matInput placeholder="Agency Cost" type="number" formControlName="agencyCost">
+				                </mat-form-field>
+				                <span class="spacer"></span>
+				               	<mat-form-field class="costFormFields">
+									<input matInput placeholder="Referral Cost" type="number" formControlName="referralCost">
+				                </mat-form-field>
+				            </div>
+	 				    </div>  					
+					</form>-->
+
+				</div>
+			</div>		
+		</mat-tab>	
+		<mat-tab label="REQ. & RESUME">
+			<div class="formContainer">
+				<form [formGroup]="candidateOtherForm"
+					  *ngIf="candidate"> 
+ 					<div class="buttonPanel">
+						<button mat-raised-button class="resetButton" 	
+								*ngIf="candidateOtherForm.enabled"
+								(click)="resetForm(candidateOtherForm)"
+						        >Reset
+						</button>
+						<span>&nbsp;</span>
+						<button mat-raised-button color="primary" 
+								*ngIf="candidateOtherForm.enabled"
+								(click)="cancelEditMode(candidateOtherForm)"
+						        >Cancel
+						</button>
+						<span class="spacer"></span>
+						<button mat-raised-button
+								*ngIf="candidateOtherForm.enabled"						
+						        color="primary"
+						        (click)="onSubmit(candidateOtherForm,false)">Save & Continue
+						</button>
+						<span>&nbsp;</span>
+						<button mat-raised-button type="submit"
+								*ngIf="candidateOtherForm.enabled"
+								(click)="onSubmit(candidateOtherForm,true)"
+						        color="primary">Save
+						</button>
+						<button mat-raised-button type="submit" 
+								*ngIf="candidateOtherForm.disabled"
+								(click)="enableForm(candidateOtherForm)"
+						        color="primary">Edit Other Details
+						</button>			
+					</div>  
+					<div class="fieldsPanel">
+						<div class="row">
+			          		<mat-form-field class="otherFormFields">
+			                    <input matInput placeholder="Candidate ID" 
+			                    		type="text"
+			                    		[value]="candidateIDForForm"
+			                    		[disabled]="true">
+			                    <mat-hint align="end">Handled By CandEx</mat-hint>
+			                </mat-form-field>
+			        		<span class="spacer"></span>
+			        		<mat-form-field class="otherFormFields">
+				                <mat-select placeholder="RequestID" 
+				                			formControlName="requestID">
+				                    <mat-option value=null disabled="true">
+				                    	Select RequestID
+				                    </mat-option>
+				                    <mat-option [value]="requestID" *ngFor=" let requestID of requestIDList">REQ-{{requestID}}</mat-option>
+				                </mat-select>  				        
+				            </mat-form-field>		
+			                <span class="spacer"></span>
+			                <mat-form-field class="otherFormFields">
+			                    <input matInput placeholder="Recruiter Username" 
+			                    		type="text"
+			                    		[value]="candidate.recruiter"
+			                    		[disabled]="true">
+			                    <mat-hint align="end">Handled By CandEx</mat-hint>
+			                </mat-form-field>    
+			        	</div><br>	
+			        	<div class="row">
+			                <div class="upload-btn-wrapper" 
+			                	 *ngIf="candidate.resume && candidateOtherForm.disabled">
+		                		<a target="_blank" color="accent"
+		                			[href]="candidate.resume.resume | safe"
+		                			mat-raised-button>
+			                    	Download resume
+			                	</a>
+			                    <span>&nbsp;&nbsp;&nbsp;</span>
+			                    <mat-form-field class="fileNameViewer">
+			                        <input matInput type="text" disabled="true" 
+			                        	[value]="uploadedResumeName">
+			                    </mat-form-field>
+			                </div>
+			                <div class="upload-btn-wrapper" *ngIf="!candidate.resume && candidateOtherForm.disabled">
+			                    <button mat-raised-button color="accent" disabled="true">
+			                    	Add resume
+			                    </button>
+			                    <span>&nbsp;&nbsp;</span>
+			                    <mat-form-field class="fileNameViewer">
+			                        <input matInput type="text" disabled="true" 
+			                        [value]="selectedFileName">
+			                    </mat-form-field>
+			                </div>
+			                <div class="upload-btn-wrapper" *ngIf="candidateOtherForm.enabled">
+			                    <button mat-raised-button color="accent"
+			                    		*ngIf="!candidate.resume">
+			                    	Add resume
+			                    </button>
+			                    <button mat-raised-button color="accent"
+			                    		*ngIf="candidate.resume">
+			                    	Change resume file
+			                    </button>
+			                    <input type="file" name="myfile" 
+			                    (change)="addResume($event.target.files)" 
+			                                accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+			                    <span>&nbsp;&nbsp;</span>
+			                    <mat-form-field class="fileNameViewer">
+			                        <input matInput type="text" disabled="true" 
+			                        [value]="selectedFileName">
+			                    </mat-form-field>
+			                </div>			                		        		
+			        	</div>
+					</div>  					
+				</form>
+			</div>		
+		</mat-tab>	
+	</mat-tab-group>
+</div>
+
+

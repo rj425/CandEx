@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+<mat-radio-group [(ngModel)]="selectedRadioButton">
+  <div *ngFor="let radioButton of radioButtonOptions;let i=index">
+    <mat-radio-button [value]="radioButton.value">
+      {{radioButton.name}}
+    </mat-radio-button> 
+  </div>
+</mat-radio-group>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close="null">Cancel</button>
+  <button mat-button [mat-dialog-close]="selectedRadioButton"
+          [disabled]="selectedRadioButton==null">Submit</button>
+</mat-dialog-actions>
+
+

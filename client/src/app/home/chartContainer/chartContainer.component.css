@@ -1,0 +1,85 @@
+.card {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.chartView {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    background: #ffffff;
+}
+
+.card-header{
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+}
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+.buttonPanel{
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+}
+
+.buttonPanel i {
+    font-size: 20px;
+}
+
+.dataTableView,
+.filterView {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin-top: 150%;
+    background: #ffffff;
+}
+
+.dataTableView {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.filterView {
+}
+
+i {
+    margin-left: 2px;
+}
+
+i:hover {
+    cursor: pointer;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.dataTableView .table-body{
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+
+.filterView .filter-body{
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}

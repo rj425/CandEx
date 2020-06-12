@@ -1,0 +1,39 @@
+<div class="container">
+    <span class="mainHeading">{{pagetitle}}</span>
+    <br><br>
+    <form novalidate [formGroup]="emailForm" (ngSubmit)="onSubmit()" *ngIf="!templateID || (templateID && emails)">
+        <div class="section">
+            <div class="rowSmall">
+                <mat-form-field *ngIf="emails" matTooltip="Cannot edit this field" class="formFields">
+                    <input matInput placeholder="Template Name" type="text" id="templateName" class="validate" formControlName="templateName">
+                </mat-form-field>
+
+                <mat-form-field *ngIf="!emails" class="formFields">
+                    <input matInput placeholder="Template Name" type="text" id="templateName" class="validate" formControlName="templateName">
+                </mat-form-field>
+
+                <span class="spacer"></span>
+                <mat-form-field class="formFields">
+                    <input matInput placeholder="Subject of the Template" type="text" id="emailSubject" class="validate" formControlName="emailSubject">
+                </mat-form-field>
+            </div>  
+            <br>
+            <div class="row" *ngIf="templateID && emails">
+                <tiny-mce elementId="email" [defaultContent]="emails.emailBody" (onEditorKeyup)="keyUpHandlerFunction($event)">
+                </tiny-mce> 
+            </div>
+            <div class="row" *ngIf="!templateID">
+                <tiny-mce elementId="email" (onEditorKeyup)="keyUpHandlerFunction($event)">
+                </tiny-mce> 
+            </div>
+        </div>
+        <br><br><br>
+        <button mat-raised-button type="submit" class="submitButton" [disabled]="emailForm.invalid" 
+                color="primary">Save
+        </button>
+    </form>
+    <br><br>
+</div>
+
+
+

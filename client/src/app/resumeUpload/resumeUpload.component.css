@@ -1,0 +1,150 @@
+.container{
+
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    text-align:center;
+}
+
+.list-icon{
+
+    line-height: 60px;
+}
+
+.mainHeading{
+
+    align-self: flex-start;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.button-container{
+
+    display:flex;
+    flex-direction: row;
+    height:10px;
+}
+
+.resume-button-flex{
+
+    flex:1;
+    font-size:30px;
+}
+
+.upload-btn-wrapper {
+
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    height: 40px;
+    width: 261px;
+}
+
+.upload-btn-wrapper input[type=file] {
+
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.informationContainer{
+
+    margin-top: 20px;
+    padding: 40px;
+    display: flex;
+    justify-content: center;  
+    color: #909090;
+}
+
+.icon-button{
+
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    line-height: 60px;
+}
+
+.informationContainer span{
+
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.submitButton{
+
+    cursor: pointer;
+}
+
+.mat-table{
+
+    overflow:auto;
+    max-height:500px;
+}
+
+.mat-table .mat-row{
+
+    min-height: 35px;
+    padding: 0px;
+}
+
+.mat-table .mat-header-row{
+
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.mat-table .mat-row:nth-child(odd){
+
+    background-color: rgba(0,0,0,0.05);
+}
+
+.mat-column-select {
+
+    overflow: visible;
+}
+
+.bar{
+
+    width:100%;
+    height:10px;
+    border-radius: 10px;
+    margin-bottom: 4px;
+}
+
+.progress{
+
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-column-serialNo{
+
+    flex: 0 0 75px;
+}
+
+.mat-column-fileName{
+
+    word-break: break-all;
+    flex: 0 0 200px;
+}
+
+.mat-column-emailID{
+
+    word-break: break-all;
+    flex:0 0 250px;
+}
+
+.aligntext{
+    
+    vertical-align:middle;
+}
+

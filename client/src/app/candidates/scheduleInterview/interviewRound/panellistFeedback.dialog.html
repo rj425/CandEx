@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="header">{{roundName}} Panellist's Feedback</div>
+  <br>
+  <mat-form-field>
+    <mat-select placeholder="Panellists"
+        [(ngModel)]="selectedPanellist">
+      <mat-option
+          disabled="true"
+          value="">
+          Select Panellist
+      </mat-option>
+      <mat-option *ngFor="let panellist of panellistsFeedback"
+          [value]="panellist">
+          {{panellist.panellistName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+ 	<div *ngIf="selectedPanellist">
+     	<div *ngIf="selectedPanellist.status=='InActive'">
+     		<div class="row">
+       		<div class="label"><label>Decision</label></div>	
+          <div class="labelValueSpacer"></div>
+     			<div class="value">{{selectedPanellist.panellistDecision}}</div>
+     		</div>
+     		<div class="row">
+     			<div class="label"><label>Comments</label></div>
+          <div class="=labelValueSpacer"></div>
+          <div *ngIf="!selectedPanellist.comments" class="value"> - </div>
+   				<div *ngIf="selectedPanellist.comments" class="value commentsSection" [innerHTML]="selectedPanellist.comments"></div>
+     		</div>
+     	</div>
+     	<div *ngIf="selectedPanellist.status!=='InActive'" 
+     		 class="row informationContainer">
+        <span class="heading">{{selectedPanellist.panellistName}} has not yet submitted the feedback form!</span>
+     	</div>
+  </div>
+</div>

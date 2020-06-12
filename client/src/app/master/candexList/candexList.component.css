@@ -1,0 +1,62 @@
+h2 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  margin-bottom: 0;
+  margin-top: 0.83em;
+}
+
+.progressSpinner{
+    margin-top: 80px;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.mat-table .mat-row{
+    min-height: 35px;
+    padding: 0px;
+}
+
+.mat-table .mat-header-row{
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.mat-table .mat-row:nth-child(odd){
+    background-color: rgba(0,0,0,0.05);
+}
+
+.mat-table .mat-row .mat-cell{
+  text-align: center;
+}
+
+.mat-table .mat-header-row .mat-header-cell{
+  text-align: center;
+}
+
+.spacer{
+  flex: 1 1 auto;
+}
+
+.headerRow{
+  display: flex;
+  flex-direction: row;
+  margin-top: -70px;
+}
+
+.filter{
+    width: 350px;
+}
+
+.addRecordButton{
+  height: 30px;
+  line-height: 30px;
+  margin-top: 15px;
+}
+
+mat-icon.mat-icon.material-icons{
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+mat-toolbar{
+	position: fixed;
+	z-index: 999;
+	top:0;
+	left: 0;
+	width: 100% !important;
+	display: flex;
+	flex-wrap:wrap;
+	min-height: 48px !important;
+	height: 48px !important;
+}
+
+.spacer {
+/*    flex: flex-grow flex-shrink flex-basis*/
+    flex: 1 1 auto;
+}
+
+.logo{
+    width: 200px;
+    float: left;
+    margin-top: -17px;
+}
+
+.vertical{
+	top: -8px;
+}

@@ -1,0 +1,68 @@
+<chartContainer
+  chartTitle='Diversity'
+  dataTableTitle="Diversity"
+  filterTitle="Diversity"
+  [showFilterIcon]="showFilterIcon"
+  (refreshEvent)="refreshComponent($event)"
+  (maximizeEvent)="resizeChart($event)"
+  width="300px"
+  height="250px">
+    <div chart>
+        <nvd3 [data]="data" [options]="options"></nvd3>  
+    </div>  
+    <div dataTable>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{choice}}</th>
+                    <th>No. of Candidates</th>
+                    <th *ngIf="fullScreenFlag">Candidate ID's</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let obj of jsonResponse ">
+                    <td>{{obj.label}}</td>
+                    <td>{{obj.candidates.length}}</td>
+                    <td *ngIf="fullScreenFlag">
+                        <div class="candidateIDsList">
+                            <div>
+                                <ul *ngFor="let candidate of obj.candidates;let i=index">
+                                    <li *ngIf="i<(obj.candidates.length/2)">
+                                        <a (click)="viewCandidate(candidate.personal.candidateID)"><u>CAND-{{candidate.personal.candidateID}}</u></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul *ngFor="let candidate of obj.candidates;let i=index">
+                                    <li *ngIf="i>=(obj.candidates.length/2)">
+                                        <a (click)="viewCandidate(candidate.personal.candidateID)"><u>CAND-{{candidate.personal.candidateID}}</u></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+  <div chartFilters>
+    <div class="radioGroup">
+        <span>Filter By : </span>
+        <br>
+        <mat-radio-group [(ngModel)]="selectedFilter" (ngModelChange)="applyFilter()">
+          <mat-radio-button value="false" checked>
+            All Candidates
+          </mat-radio-button>
+          <mat-radio-button value="true" class="radioButton">
+            Offered Candidates
+          </mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="choice">
+          <mat-select placeholder="Choose metric" [(ngModel)]="choice" (ngModelChange)="applyChoice()">
+              <mat-option [value]="mix" *ngFor="let mix of choiceList">{{mix}}</mat-option>
+          </mat-select>
+       </mat-form-field>
+    </div>
+  </div>
+ </chartContainer>

@@ -1,0 +1,43 @@
+<table *ngIf="candidateData!==null && roundPanellists!==undefined">
+    <thead>   
+        <tr>
+            <th>Level</th>
+            <th>Final?</th>   
+            <th>Date</th>
+            <th>Status</th>   
+            <th>Interview Rounds</th>  
+        </tr>
+    </thead>
+    <tr *ngFor="let level of candidateData.interviewLevels">
+        <td>{{level.levelOfInterview}}</td>
+        <td>{{level.isFinal?'Yes':'No'}}</td>
+        <td>{{level.interviewDate}}</td>
+        <td>{{level.levelDecision!==''?level.levelDecision:'-'}}</td>                       
+        <table>
+            <thead *ngIf="level.interviewRounds.length!==0">                
+                <tr>
+                    <th>Round</th>
+                    <th>Date</th>
+                    <th>Time Slot</th>
+                    <th>Panel</th>
+                    <th>Mode</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let round of level.interviewRounds">
+                    <td>ROUND {{round.roundNumber}}</td>
+                    <td>{{round.interviewDate}}</td>                        
+                    <td>{{round.interviewStartTime}}-{{round.interviewFinishTime}}</td>
+                    <td>
+                        <ul *ngFor="let panellist of round.panel">
+                            <li>{{panellist.panellistName}}</li>
+                        </ul>
+                    </td>
+                    <td>{{round.modeOfInterview}}</td>
+                    <td>{{round.roundDecision!==''?round.roundDecision:'-'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </tr>
+</table>

@@ -1,0 +1,38 @@
+h2{
+  margin-bottom: 10px;
+}
+
+/deep/  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+    border-color: #006c77;
+}
+
+/deep/  .mat-radio-button.mat-accent .mat-radio-inner-circle{
+    background-color: #006c77;
+}
+
+/deep/ .mat-dialog-container{
+	border-radius: 5px;
+}
+
+.labelValue{
+     display:flex;
+    flex-direction: row;
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+
+.label{
+  width: 200px;
+  font-size: 13px;
+  color: #747474;
+}
+
+.value{
+    width: 200px;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.dropReason{
+  width: 100%;
+}

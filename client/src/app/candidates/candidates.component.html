@@ -1,0 +1,221 @@
+<div class="container">
+    <span class="mainHeading">Add a Candidate</span>
+    <br>
+    <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+            <mat-select placeholder="Request ID" formControlName="requestID" class="requestID">
+                <mat-option value=null disabled="true">Select Request ID</mat-option>
+                <mat-option *ngFor="let request of requestList" [value]="request.requestID">
+                REQ-{{ request.requestID }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <div class="sub-header">Personal Details</div>
+        <br>
+        <div formGroupName="personal" class="section">
+            <div class="row">
+                <mat-form-field class="personalFields">
+                    <input matInput placeholder="First Name" type="text" class="validate" formControlName="firstName">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="personalFields">
+                    <input matInput placeholder="Last Name" type="text" class="validate" formControlName="lastName">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="personalFields">
+                    <mat-select placeholder="Gender" formControlName="gender">
+                        <mat-option value=null disabled="true">Select Gender</mat-option>
+                        <mat-option value="Male">Male</mat-option>
+                        <mat-option value="Female">Female</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span class="spacer"></span>
+                <div class="personalFields"></div>
+            </div> 
+            <div class="row">
+                <mat-form-field class="personalFields">
+                    <input matInput [matDatepicker]="picker" placeholder="Date Of Birth" formControlName="dateOfBirth">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="personalFields">
+                    <span matPrefix>+91 &nbsp;</span>
+                    <input matInput placeholder="Mobile" type="number" class="validate" formControlName="mobile">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="personalFields">
+                    <input matInput placeholder="Email" type="text" class="validate" formControlName="email">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <div class="personalFields"></div>
+            </div>   
+            <div class="row">
+                <mat-form-field class="personalFields">
+                    <input matInput placeholder="Current City" type="text" class="validate" formControlName="currentAddress">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="personalFields">
+                    <input matInput placeholder="Permanent City" type="text" class="validate" formControlName="permanentAddress">
+                </mat-form-field>            
+                <span class="spacer"></span>
+                <div class="personalFields"></div>
+                <span class="spacer"></span>
+                <div class="personalFields"></div>       
+            </div>
+        </div>
+        <br>
+        <div class="sub-header">
+            <span>Educational Details</span>
+            <mat-icon class="addIcon" matTooltip="Add Row" (click)="addEducationRow()">add_circle</mat-icon>
+        </div>
+        <br>          
+        <div formArrayName="education" class="section">
+            <div *ngFor="let educationRow of candidateForm['controls'].education['controls']; let i=index">
+                <div formGroupName={{i}}>
+                    <div class="row">
+                        <mat-form-field class="educationalFields">
+                            <mat-select placeholder="Institution" formControlName="institutionName">
+                                <mat-option value=null disabled="true">Select Institution</mat-option>
+                                <mat-option [value]="institution.institutionName" 
+                                        *ngFor="let institution of institutionList">
+                                        {{ institution.institutionName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <span class="spacer"></span>
+                        <mat-form-field class="educationalFields">
+                            <mat-select placeholder="Course" formControlName="courseName">
+                                <mat-option value=null disabled="true">Select Course</mat-option>
+                                <mat-option [value]="course.courseName" 
+                                        *ngFor="let course of courseList">
+                                        {{ course.courseName }}
+                                </mat-option>
+                            </mat-select>                
+                        </mat-form-field>
+                        <span class="spacer"></span>
+                        <mat-form-field class="educationalFields">
+                            <mat-select placeholder="Type" formControlName="graduationType">
+                                <mat-option value=null disabled="true">Select type</mat-option>
+                                <mat-option [value]="type" *ngFor="let type of graduationType">{{type}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <span class="spacer"></span>
+                        <mat-form-field class="educationalFields">
+                            <input matInput placeholder="GPA" type="number" class="validate" 
+                                   step="0.01" formControlName="gpa">
+                        </mat-form-field>
+                        <span class="spacer"></span>
+                        <mat-form-field class="educationalFields">
+                            <input matInput placeholder="Year" type="number" class="validate" 
+                                   formControlName="graduationYear">
+                        </mat-form-field>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <mat-icon class="removeIcon" matTooltip="Remove Row" 
+                                (click)="removeEducationRow(i)">remove_circle
+                        </mat-icon>                 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="sub-header">Professional Details</div>
+        <br>
+        <div formGroupName="professional" class="section">
+            <div class="row">
+                <mat-form-field class="professionalFields">
+                    <input matInput placeholder="Current Employer" type="text" class="validate" 
+                           formControlName="currentEmployer">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="professionalFields">
+                    <input matInput placeholder="Current Designation" type="text" class="validate" 
+                           formControlName="currentDesignation">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="professionalFields">
+                    <input matInput placeholder="Current CTC" type="number" class="validate" 
+                           formControlName="currentCTC">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <div class="professionalFields">
+                </div>
+            </div>
+            <div class="row">
+                <mat-form-field class="professionalFields">
+                    <input matInput placeholder="Experience(in Years)" type="number" class="validate" 
+                           formControlName="experienceYear">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="professionalFields">
+                    <input matInput placeholder="Experience(in months)" type="number" class="validate" 
+                           formControlName="experienceMonth">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <div class="professionalFields">
+                </div>
+                <span class="spacer"></span>
+                <div class="professionalFields">
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="sub-header">Process Details</div>
+        <br>
+        <div class="section" formGroupName="process">
+            <div class="row">
+                <mat-form-field class="processFields">
+                    <mat-select placeholder="Source" formControlName="source">
+                        <mat-option value=null disabled="true">Select Source</mat-option>
+                        <mat-option [value]="source.source" 
+                                 *ngFor="let source of sourceList">
+                                {{ source.source }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="processFields">
+                    <input matInput placeholder="Last Interview Status" type="text" class="validate" 
+                           formControlName="lastInterviewStatus">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="processFields">
+                    <mat-select placeholder="Title" formControlName="title">
+                        <mat-option value=null disabled="true">Select Title</mat-option>
+                        <mat-option [value]="designation.designation" 
+                                 *ngFor="let designation of designationList">
+                                {{ designation.designation }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="processFields">
+                    <mat-select placeholder="Team" formControlName="team">
+                        <mat-option value=null disabled="true">Select Team</mat-option>
+                        <mat-option [value]="department.departmentName" 
+                                 *ngFor="let department of departmentList">
+                                {{ department.departmentName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="upload-btn-wrapper">
+                    <button mat-raised-button color="accent">Upload a resume</button>
+                    <input type="file" name="myfile" (change)="addResume($event.target.files)" 
+                                accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    <span>&nbsp;&nbsp;</span>
+                    <mat-form-field class="fileNameViewer">
+                        <input matInput type="text" disabled="true" [value]="selectedFileName">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+        <button mat-raised-button type="submit" class="submitButton" 
+                color="primary">Add Candidate
+        </button>
+    </form>
+    <br><br>
+</div>

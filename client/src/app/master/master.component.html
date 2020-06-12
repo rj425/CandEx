@@ -1,0 +1,23 @@
+<div class="container">
+	<span class="mainHeading">Master Table Management</span>
+	<br>
+	<div class="row">
+		<mat-form-field>
+			<mat-select placeholder="Select a Master Table" 
+					   [(ngModel)]="masterName" 
+					   name="masterName" (ngModelChange)="onChange($event)">
+				<mat-option value=null disabled="true">Select a Master Table</mat-option>
+				<mat-option *ngFor=" let x of ListOfMasters" [value]="x">{{x}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	<candexList *ngIf=" masterData"
+			[masterList]="masterData" 
+			[keyList]="keys" 
+			[valueList]="values"
+			[showForm]="showForm"
+			[choice]="choice"
+			(notifyMaster)="notifyMasterHandler($event)" >
+	</candexList>
+		
+</div>

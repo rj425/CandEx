@@ -1,0 +1,44 @@
+<div class="container">
+    <span class="mainHeading">List of Email Templates</span>
+    <div class="filterDiv">
+      <mat-form-field floatPlaceholder="never" class="filter">
+        <input matInput #filter placeholder="Filter Templates" class="filterInput"
+              matTooltip="Type 'Empty' to filter templates with empty fields">
+      </mat-form-field>
+    </div>
+    <div class="progressSpinner" *ngIf="!emails">
+      <mat-progress-spinner
+          color="primary"
+          mode="indeterminate">
+      </mat-progress-spinner>       
+    </div>    
+    <mat-table #table [dataSource]="dataSource" *ngIf="emails">
+      <ng-container matColumnDef="templateID" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>Template ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.templateID}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="templateName" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>Template Name</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.templateName}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="emailSubject" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>Subject</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.emailSubject}}</mat-cell>
+      </ng-container>
+       <ng-container matColumnDef="actions" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="actions">
+            <mat-icon matTooltip="Edit Template" (click)="editEmail(row)">
+              edit
+            </mat-icon>  
+        </mat-cell>
+      </ng-container>
+   
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table> 
+    <br><br>  
+</div>
+
+
+

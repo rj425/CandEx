@@ -1,0 +1,8 @@
+
+# Ignoring Media
+/media/myapp/*
+/media/myapp2/*
+
+# Ignoring Pyc files
+
+*.pyc

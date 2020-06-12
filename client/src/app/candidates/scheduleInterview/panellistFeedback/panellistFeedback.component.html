@@ -1,0 +1,206 @@
+<div class="container" *ngIf="!invalidURL">
+	<mat-tab-group (selectChange)="selectedTabHandler($event)">
+		<mat-tab label="Interview Feedback">
+			<div class="informationContainer" *ngIf="showInformationMessage">
+				<div class="greetingHeading">
+					<span>Hi {{panellistData?panellistData.panellistName+'!':null}}</span>
+					<span>&nbsp;</span>
+					<mat-icon class="greetingIcon">tag_faces</mat-icon>
+				</div>
+				<br>
+				<span class="heading1">This Tab will be active only after interview start time.</span>
+				<br><br>
+				<span class="heading3">Interview Date - {{roundData?roundData.interviewDate:null}}</span>
+				<span class="heading4">Start Time - {{roundData?roundData.interviewStartTime:null}}</span>
+			</div>
+			<div class="feedbackContent" *ngIf="showNotesForm || showFeedbackForm">
+				<div class="row">
+					<div class="feedbackHeadings">
+	                    <span class="subHeading1">Hi {{panellistData?panellistData.panellistName+'!':null}}</span>
+	                </div>
+				</div><br>
+				<span class="subHeading1">Candidate Information : </span>
+				<hr>
+				<div class="row">
+					<div class="label">
+						<label>Name Of Candidate</label>
+					</div>
+					<div class="labelValueSpacer"></div>
+					<div class="value">
+						{{candidateData?candidateData.personal.firstName:null}} {{candidateData?candidateData.personal.lastName:null}}
+					</div>
+					<div class="columnSpacer"></div>
+					<div class="label"></div>
+					<div class="labelValueSpacer"></div>
+					<div class="value"></div>
+				</div>
+				<div class="row">
+					<div class="label">
+						<label>Date Of Interview</label>
+					</div>
+					<div class="labelValueSpacer"></div>
+					<div class="value">
+						{{levelData?levelData.interviewDate:null}} 
+					</div>
+					<div class="columnSpacer"></div>
+					<div class="label">
+						<label>Time Of Interview</label>
+					</div>
+					<div class="labelValueSpacer"></div>
+					<div class="value">
+						{{roundData?roundData.interviewStartTime:null}} - {{roundData?roundData.interviewFinishTime:null}} 
+					</div>
+				</div>
+				<div class="row">
+					<div class="label">
+						<label>Level Of Interview</label>
+					</div>
+					<div class="labelValueSpacer"></div>					
+					<div class="value">
+						{{levelData?levelData.levelOfInterview:null}}
+					</div>
+					<div class="columnSpacer"></div>
+					<div class="label">
+						<label>Round Number</label>
+					</div>
+					<div class="labelValueSpacer"></div>
+					<div class="value">
+						{{roundData?"ROUND "+roundData.roundNumber:null}}
+					</div>			
+				</div>		
+				<div class="row">
+					<div class="label">
+						<label>Mode Of Interview</label>
+					</div>
+					<div class="labelValueSpacer"></div>					
+					<div class="value">
+						{{roundData?roundData.modeOfInterview:null}}
+					</div>
+					<div class="columnSpacer"></div>					
+					<div class="label"></div>
+					<div class="labelValueSpacer"></div>
+					<div class="value"></div>
+				</div>	
+			</div>
+			<br>
+			<div *ngIf="showNotesForm">	
+				<form [formGroup]="notesForm" (ngSubmit)="onSubmitNotes(notesForm)">
+					<div class="row">
+						<span class="subHeading1">Add Notes</span>
+					</div>	
+					<hr>
+					<label style="color: #747474;font-size: 12px">Please leave some Notes for other Interviewers.</label>
+					<div class="row">
+						<tiny-mce elementId="notes" 
+									[getContent]="getNotes"
+									(sendContent)="updateNotesForm($event)">
+					    </tiny-mce>	
+					</div>
+					<br>
+					<div class="row" formGroupName="round">
+		                <mat-form-field class="notesFormFields">
+		                    <input matInput placeholder="Start Time" type="time"
+							formControlName="interviewStartTime">
+		                </mat-form-field>
+		                <div class="spacer"></div>
+		                <mat-form-field class="notesFormFields">
+		                    <input matInput placeholder="Finish Time" type="time"
+							formControlName="interviewFinishTime">
+		                </mat-form-field>
+		                <div class="textlink" *ngIf="!hideNowButton" 
+							 (click)="setCurrentTime()">NOW
+						</div>
+		                <div class="spacer"></div>
+		                <div class="notesFormFields"></div>
+		               	<div class="spacer"></div>
+		                <div class="notesFormFields"></div>
+					</div>
+					<div></div>
+					<div class="row">
+						<div class="col s12 l12">
+							<button type="submit"
+									mat-raised-button
+									color="primary"
+					        		[disabled]="notesForm.invalid">
+				            		I am Done!
+				    		</button>
+				    	</div>
+				    </div>
+				</form>				
+			</div>
+			<div *ngIf="showFeedbackForm">
+				<form [formGroup]="feedbackForm" (ngSubmit)="onSubmitFeedback(feedbackForm)">	
+					<div class="row">
+						<span class="subHeading1">Personal Feedback</span>
+					</div>	
+					<hr>
+					<div class="row">
+						<mat-form-field class="feedbackFormFields">
+			                <mat-select placeholder="Recommendation" formControlName="panellistDecision">
+			                    <mat-option disabled="true" 
+			                            value=null>Coose Your Option
+			                    </mat-option>
+			                    <mat-option [value]="option.value" 
+			                            *ngFor="let option of decisionOptions">{{option.value}}
+			                    </mat-option>
+			                </mat-select>
+			            </mat-form-field> 
+					</div>
+					<br>
+					<label style="color: #747474;font-size: 12px">Explanation For Recommendation</label>
+					<div class="row" *ngIf="!disableButton">
+						<tiny-mce elementId="feedback" 
+									[getContent]="getFeedback"
+									(sendContent)="updateFeedbackForm($event)">
+					    </tiny-mce>	
+					</div>
+					<div class="row" *ngIf="disableButton">
+						<div class="commentsSection" 
+							 [innerHTML]="feedbackForm.value['comments']">
+						</div>
+					</div>		
+					<br>
+				    <div class="row">
+						<button type="submit" 
+				        		mat-raised-button color="primary"
+				        		[disabled]="disableButton || !feedbackForm.valid">
+			            		Submit
+			    		</button>
+				    </div>
+				</form>
+			</div>		
+		</mat-tab>
+		<mat-tab label="Interview Process Timeline">
+			<interviewProcessTimeline [candidateID]="candidateID"
+									  [selectedTabIndex]="selectedTabIndex"
+									  [authorizationHeader]="authorizationHeader">	
+			</interviewProcessTimeline>			
+		</mat-tab>
+		<mat-tab label="Other Panellist Notes">
+			<panellistNotes [candidateID]="candidateID"
+							[selectedTabIndex]="selectedTabIndex"
+							[authorizationHeader]="authorizationHeader">
+			</panellistNotes>				
+		</mat-tab>
+		<mat-tab label="Candidate Resume">
+			<div class="informationContainer" *ngIf="!resumeAvailable">
+				<br>
+				<span class="heading0">Resume Not Uploaded!</span>
+				<br><br>
+			</div>
+			<div *ngIf="resumeAvailable">
+				<div *ngIf="resumeFormat==='pdf'">
+					<embed [src]="candidateData.resume.resume | safe"/>
+				</div>
+				<div class="informationContainer" 
+					 *ngIf="resumeFormat==='doc' || resumeFormat==='docx'">
+					<br/>
+					<span><a class="downloadButton" [href]="candidateData.resume.resume | safe">Download Resume</a></span>
+				</div>
+			</div>			
+		</mat-tab>	
+	</mat-tab-group>
+</div>
+
+
+

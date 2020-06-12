@@ -1,0 +1,13 @@
+<div>
+    <toolbar></toolbar>
+    <mat-progress-bar mode="indeterminate" *ngIf="displayProgressBar"></mat-progress-bar>
+    <div class="navSpacer"></div>
+    <div class="mainContainer">
+        <div *ngIf="isLoggedIn" class="sideContainer">
+            <navbar></navbar>
+        </div>
+        <div class="routerOutletContainer" [style.width.%]="routerOutletContainerWidth">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

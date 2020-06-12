@@ -1,0 +1,96 @@
+<div class="container">
+    <span class="mainHeading">Manage Candidates</span> 
+    <div class="filterDiv">
+      <mat-form-field floatPlaceholder="never" class="filter">
+        <input matInput #filter placeholder="Filter Candidates" class="filterInput"
+              matTooltip="Type 'Empty' to filter candidates with empty fields">
+      </mat-form-field>
+    </div>
+    <div class="progressSpinner" *ngIf="!dataSource">
+      <mat-progress-spinner
+          color="primary"
+          mode="indeterminate">
+      </mat-progress-spinner>       
+    </div>
+    <mat-table #table [dataSource]="dataSource" *ngIf="dataSource">Type 'Empty' to filter candidates with empty fields
+      <ng-container matColumnDef="candidateID">
+        <mat-header-cell *matHeaderCellDef>Candidate ID</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="candidateID-col">CAND-{{row.candidateID}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="requestID">
+        <mat-header-cell *matHeaderCellDef>Request ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.requestID?"REQ-"+row.requestID:'-'}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="candidateName">
+        <mat-header-cell *matHeaderCellDef>Candidate Name</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.personal.firstName?row.personal.firstName:'-'}} {{row.personal.lastName?row.personal.lastName:'-'}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="mobile">
+        <mat-header-cell *matHeaderCellDef>Mobile</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.personal.mobile?row.personal.mobile:'-'}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="processStartDate" class="processStartDate-col">
+        <mat-header-cell *matHeaderCellDef>Process Start Date</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{row.process?row.process.processStart?(row.process.processStart|date: 'dd/MM/yyyy'):'-':'-'}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="processStatus">
+        <mat-header-cell *matHeaderCellDef>Process Status</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.process?row.process.processStatus:'-'}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let row" class="actions">
+            <mat-icon matTooltip="View & Edit Candidate" 
+                     *ngIf="row.status!=='Dropped'"
+                    (click)="editCandidate(row.candidateID)">
+              edit
+            </mat-icon>
+            <mat-icon matTooltip="Start Process"
+                      *ngIf="(row.process?row.process.processStart:null)==null && row.status!=='Dropped'" 
+                      (click)="startProcess(row.process?row.process.processID:null,row.candidateID,row.requestID?row.requestID:null)">
+              play_arrow
+            </mat-icon>
+            <mat-icon matTooltip="Schedule Interview"
+                      *ngIf="(row.process?row.process.processStart:null)!=null && row.status!=='Dropped'"
+                      (click)="scheduleInterview(row.candidateID)">
+              schedule
+            </mat-icon>
+            <mat-icon matTooltip="Mail" 
+                     *ngIf="row.status!=='Dropped'"
+                      (click)="showEmail(row)">
+              mail
+            </mat-icon> 
+            <mat-icon matTooltip="Ask For Feedback" *ngIf="row.status!=='Dropped' && (row.offer!=null?row.offer.offerStatus==null:true)" (click)="askForFeedback(row)">
+              event_note
+            </mat-icon>
+            <mat-icon matTooltip="Drop Candidate" 
+                     *ngIf="row.status!=='Dropped' && (row.offer!=null?row.offer.offerStatus==null:true)"
+                      (click)="showDropCandidateDialog(row.requestID,row.candidateID,row.personal.firstName+' '+row.personal.lastName,row.process.processID)">
+              delete
+            </mat-icon>
+            <mat-icon *ngIf="row.offer!=null && row.offer.offerStatus=='Accepted'" matTooltip="Candidate Engagement" (click)="goToCandidateEngagement(row.candidateID)">
+              contact_phone
+            </mat-icon> 
+          <!--  <mat-icon *ngIf="row.offer!=null && row.offer.offerStatus=='Accepted'" matTooltip="Candidate Offer Letter" (click)="goToGenerateOfferletter()">
+              send
+            </mat-icon> -->
+                
+            <mat-icon *ngIf="row.offer!=null && row.offer.offerStatus=='Accepted'" matTooltip="Add Employee Details"
+                      (click)="goToEmployeeDetails(row.candidateID)">
+              assignment_ind
+            </mat-icon>
+            
+                    
+              
+          
+                           
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table> 
+    <br><br>  
+</div>
+

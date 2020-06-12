@@ -1,0 +1,61 @@
+<chartContainer
+  chartTitle="Hiring Managers"
+  filterTitle="Hiring Managers"
+  dataTableTitle="Hiring Managers"
+  width="250px"
+  height="250px"
+  [showFilterIcon]="showFilterIcon"
+  (maximizeEvent)="resizeChart($event)"
+  (refreshEvent)="refreshComponent($event)">
+    <div chart>
+        <div class="radioGroup">
+          <mat-radio-group [(ngModel)]="selectedFilter" (ngModelChange)="applyFilter()">
+            <mat-radio-button value="false" checked>
+              Total Reqs.
+            </mat-radio-button>
+            <mat-radio-button value="true" class="radioButton">
+              Active Reqs.
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>      
+        <nvd3 chart [options]="options" [data]="data" style="height:200px;width:300px"></nvd3>        
+    </div>
+    <div dataTable>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Hiring Manager</th>
+          <th>No. of Requests</th>
+          <th *ngIf="fullScreenFlag">Request ID's</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let obj of jsonResponse ">
+            <td>{{obj.label}}</td>
+            <td>{{obj.requests.length}}</td>
+            <td *ngIf="fullScreenFlag">
+              <div class="candidateIDsList">
+                  <div>
+                      <ul *ngFor="let request of obj.requests;let i=index">
+                          <li *ngIf="i<(obj.requests.length/2)">
+                              <a (click)="viewRequest(request.requestID)"><u>REQ-{{request.requestID}}</u></a>
+                          </li>
+                      </ul>
+                  </div>
+                  <div>
+                      <ul *ngFor="let request of obj.requests;let i=index">
+                          <li *ngIf="i>=(obj.requests.length/2)">
+                              <a (click)="viewRequest(request.requestID)"><u>REQ-{{request.requestID}}</u></a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>              
+            </td> 
+           </tr>
+      </tbody>
+      </table>
+    </div> 
+</chartContainer>
+
+
+

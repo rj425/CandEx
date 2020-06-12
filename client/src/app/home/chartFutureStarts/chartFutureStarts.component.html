@@ -1,0 +1,45 @@
+<chartContainer
+	chartTitle='Future Starts'
+	dataTableTitle='Future Starts'
+	[showFilterIcon]="showFilterIcon"
+    (maximizeEvent)="resizeChart($event)"
+	(refreshEvent)="refreshComponent($event)"
+	width="300px"
+	height="250px">
+    <nvd3 chart [data]="data" [options]="options"></nvd3>    
+	<div dataTable>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Month</th>
+					<th>Candidates to Join</th>
+                    <th *ngIf="fullScreenFlag">Candidate ID's</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let monthNumber of keys;let i=index">
+					<td>{{labels[i]}}</td>
+					<td>{{jsonResponse[monthNumber].length}}</td>
+                    <td *ngIf="fullScreenFlag">
+                        <div class="candidateIDsList">
+                            <div>
+                                <ul *ngFor="let candidate of jsonResponse[monthNumber];let i=index">
+                                    <li *ngIf="i<(jsonResponse[monthNumber].length/2)">
+                                        <a (click)="viewCandidate(candidate.candidateID)"><u>CAND-{{candidate.candidateID}}</u></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul *ngFor="let candidate of jsonResponse[monthNumber];let i=index">
+                                    <li *ngIf="i>=(jsonResponse[monthNumber].length/2)">
+                                        <a (click)="viewCandidate(candidate.candidateID)"><u>CAND-{{candidate.candidateID}}</u></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</chartContainer>

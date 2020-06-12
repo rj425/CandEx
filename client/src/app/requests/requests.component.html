@@ -1,0 +1,175 @@
+<div class="container">
+    <div class=headerRow>
+        <span class="mainHeading">{{title}}</span>
+        <span class="spacer"></span>
+          <mat-slide-toggle 
+          matTooltip="Send request update mails to Department Manager"
+          class="mailNotification"
+          color="primary"
+          [checked]="mailNotification"
+          (change)="mailNotification=!mailNotification">
+        Mail Notification
+        </mat-slide-toggle>
+    </div>
+    <br><br>
+    <form [formGroup]="requestForm" (ngSubmit)="onSubmit()"
+           *ngIf="!requestID">
+        <div class="section">
+            <div class="row">
+                <mat-form-field class="formFields">
+                    <mat-select placeholder="Request Status" formControlName="requestStatus">
+                        <mat-option value=null disabled="true">Select Status</mat-option>
+                        <mat-option value="Open">Open</mat-option>
+                        <mat-option value="Closed">Closed</mat-option>
+                        <mat-option value="Hold On">Hold On</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="formFields">
+                    <mat-select placeholder="Position" formControlName="position">
+                        <mat-option value=null disabled="true">Select Position</mat-option>
+                        <mat-option [value]="position.position" *ngFor=" let position of positionData">{{position.position}}</mat-option>
+                    </mat-select>      
+                </mat-form-field>
+                <span class="spacer"></span>
+                <div class="formFields">
+                </div>
+                <span class="spacer"></span>
+                <div class="formFields"></div>
+            </div>
+            <div class="row">
+                <mat-form-field class="skillsSelect">
+                    <mat-select placeholder="Skills Required"
+                                [(ngModel)]="selectedSkill"  
+                                (ngModelChange)="addSkills($event)" [ngModelOptions]="{standalone: true}"      
+                                multiple="true">
+                        <mat-option value=null disabled="true">Select skills</mat-option>
+                        <mat-option *ngFor=" let skill of skillData" [value]="skill.skill">{{skill.skill}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="formFields">
+                    <input matInput placeholder="Experience(in years)" type="number" class="validate" formControlName="experienceYears">
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field >
+                    <input matInput placeholder="Experience(in months)" type="number" class="validate" formControlName="experienceMonths">
+                </mat-form-field>           
+                <span class="spacer"></span>
+                <div class="formFields"></div>
+                <span class="spacer"></span>
+                <div class="formFields"></div>       
+            </div>
+            <div class="row">
+                <mat-form-field class="formFields">
+                    <mat-select placeholder="Designation" formControlName="designation" class="formFields">
+                        <mat-option value=null disabled="true">Select Designation</mat-option>
+                        <mat-option *ngFor=" let designation of designationData" [value]="designation.designation"> 
+                            {{designation.designation}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span class="spacer"></span>
+                <mat-form-field class="formFields">
+                    <mat-select placeholder="Department" formControlName="department">
+                        <mat-option value=null disabled="true">Select Department</mat-option>
+                        <mat-option *ngFor=" let department of departmentData" [value]="department">
+                            {{department.departmentName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span class="spacer"></span>
+                <div class="formFields"></div>
+                <span class="spacer"></span>
+                <div class="formFields"></div>                         
+            </div>
+        </div>  
+        <br><br>
+        <button mat-raised-button type="submit" class="submitButton" 
+                color="primary">{{buttonName}}
+        </button>
+    </form>
+    <form [formGroup]="requestForm" (ngSubmit)="onSubmit()"
+               *ngIf="requestData && requestID">
+            <div class="section">
+                <div class="row">
+                    <mat-form-field class="formFields">
+                        <mat-select placeholder="Request Status" formControlName="requestStatus">
+                            <mat-option value=null disabled="true">Select Status</mat-option>
+                            <mat-option value="Open">Open</mat-option>
+                            <mat-option value="Closed">Closed</mat-option>
+                            <mat-option value="Hold On">Hold On</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <span class="spacer"></span>
+                    <mat-form-field class="formFields">
+                        <mat-select placeholder="Position" formControlName="position" class="formFields">
+                            <mat-option value=null disabled="true">Select Position</mat-option>
+                            <mat-option [value]="position.position" *ngFor=" let position of positionData">{{position.position}}</mat-option>
+                        </mat-select>    
+                    </mat-form-field>  
+                    <span class="spacer"></span>
+                    <div class="formFields">
+                    </div>
+                    <span class="spacer"></span>
+                    <div class="formFields"></div>
+                </div>
+                <div class="row">
+                    <mat-form-field class="skillsSelect">
+                        <mat-select placeholder="Skills Required"
+                                    [(ngModel)]="selectedSkill"  
+                                    (ngModelChange)="addSkills($event)" [ngModelOptions]="{standalone: true}"      
+                                    multiple="true">
+                            <mat-option value=null disabled="true">Select skills</mat-option>
+                            <mat-option *ngFor=" let skill of skillData" [value]="skill.skill">{{skill.skill}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field class="formFields">
+                        <input matInput placeholder="Experience(in years)" type="number" class="validate" formControlName="experienceYears">
+                    </mat-form-field>
+                    <span class="spacer"></span>
+                    <mat-form-field >
+                        <input matInput placeholder="Experience(in months)" type="number" class="validate" formControlName="experienceMonths">
+                    </mat-form-field>           
+                    <span class="spacer"></span>
+                    <div class="formFields"></div>
+                    <span class="spacer"></span>
+                    <div class="formFields"></div>       
+                </div>
+                <div class="row">
+                    <mat-form-field class="formFields">
+                        <mat-select placeholder="Designation" formControlName="designation">
+                            <mat-option value=null disabled="true">Select Designation</mat-option>
+                            <mat-option *ngFor=" let designation of designationData" [value]="designation.designation"> 
+                                {{designation.designation}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <span class="spacer"></span>
+                    <mat-form-field class="formFields">
+                        <mat-select placeholder="Department" formControlName="department">
+                            <mat-option value=null disabled="true">Select Department</mat-option>
+                            <mat-option *ngFor=" let department of departmentData" [value]="department">
+                                {{department.departmentName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <span class="spacer"></span>
+                    <div class="formFields"></div>
+                    <span class="spacer"></span>
+                    <div class="formFields"></div>                         
+                </div>
+            </div>  
+            <br><br>
+            <button mat-raised-button type="submit" class="submitButton" 
+                    color="primary">{{buttonName}}
+            </button>
+        </form>
+    <br><br>
+</div>
+
+
+

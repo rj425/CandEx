@@ -1,0 +1,25 @@
+<cardContainer 
+    cardTitle="Request Age" 
+    width=250px
+    height="250px"
+    (refreshEvent)="refreshComponent($event)">
+    <div *ngIf="resultLength==0" class="informationMessage">
+        No Data Available!
+    </div>
+    <div card-content *ngIf="resultLength!==0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Request Age (Days)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let x of jsonResponse">
+                    <td class="request"><a (click)="viewRequest(x.requestID)"><u>REQ-{{x.requestID}}</u></a></td>
+                    <td>{{x.age}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</cardContainer>

@@ -1,0 +1,79 @@
+/deep/ .mat-dialog-container{
+  border-radius: 5px;
+  margin: auto;
+}
+
+.headerRow{
+  display: flex;
+  flex-direction: row;
+}
+
+.headerRow .spacer{
+  flex: 1 1 auto;
+}
+
+form .row{
+  display: flex;
+  flex-direction: row;
+}
+
+.mailForm{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  overflow-y: auto;
+  max-height: 300px;
+  font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.mailForm .mailLabel{
+    font-size: 13px;
+    color: darkslategrey;
+    font-weight: 400;
+    line-height: 30px;
+    width: 100px;
+}
+
+.mailForm .fromInput{
+  color: darkgray;
+}
+
+.mailForm .mailInput{
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    height: 30px;
+    width: 80%;
+    margin-bottom:7px;
+    padding-left: 10px;
+}
+
+.mailForm input.ng-invalid.ng-touched{
+  border: 1px solid #f67c73;
+}
+
+.mailForm input:focus{
+  outline: none !important;
+  border: 1px solid #0097a7;
+}
+
+.labelValue{
+    margin-top: -20px;
+    display:flex;
+    flex-direction: row;
+}
+
+.label{
+  width: 100px;
+  font-size: 13px;
+  color: #747474;
+}
+
+.value{
+    width: 200px;
+    font-size: 13px;
+    font-weight: 300;
+}

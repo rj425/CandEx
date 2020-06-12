@@ -1,0 +1,62 @@
+<div>
+    <div class="headerRow">
+        <h1 mat-dialog-title>Compose New Mail</h1>
+        <span class="spacer"></span>
+        <mat-form-field>
+            <mat-select placeholder="Choose Template"
+                    [(ngModel)]="templateChoice"
+                    (ngModelChange)="onTemplateSelection($event)">
+                <mat-option
+                        value="None">
+                        Create Own
+                </mat-option>
+                <mat-option *ngFor=" let templateObject of emailTemplates" [value]="templateObject">    {{templateObject.templateName}}
+                </mat-option>        
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="candidate" class="labelValue">
+        <div class="label">
+            <label>Candidate Name : </label>
+        </div>
+        <div class="value">
+            {{candidate.personal.firstName}} {{candidate.personal.lastName}}
+        </div>
+    </div>    
+    <form [formGroup]="emailForm" *ngIf="emailTemplates"
+          novalidate (ngSubmit)="submitEmailForm()">
+        <div class="mailForm" #composeMail>
+            <div class="row">
+                <label class="mailLabel">From</label>
+                <input type="email" class="validate mailInput fromInput" formControlName="from">
+            </div>
+            <div class="row">
+                <label class="mailLabel">To</label>
+                <input type="email" class="validate mailInput" formControlName="to">
+            </div>
+            <div class="row">
+                <label class="mailLabel">CC</label>
+                <input type="email" class="validate mailInput" formControlName="cc">
+            </div>
+            <div class="row">
+                <label class="mailLabel">Subject:</label>
+                <input type="text" class="validate mailInput" formControlName="subject">
+            </div> 
+            <div class="row">
+                <label class="mailLabel">Body</label>
+                <div>
+                    <tiny-mce elementId="compose" 
+                               [defaultContent]="emailBody" 
+                               [width]="editorWidth"
+                               [height]="editorHeight"
+                              (onEditorKeyup)="keyUpHandlerFunction($event)">
+                    </tiny-mce>    
+                </div>         
+            </div>
+        </div>
+        <mat-dialog-actions>
+            <button mat-button mat-dialog-close="null">Cancel</button>
+            <button mat-button type="submit" [disabled]="emailForm.invalid || emailForm.disabled">{{sendButton}}</button>
+        </mat-dialog-actions>
+    </form>
+</div>

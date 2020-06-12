@@ -1,0 +1,137 @@
+<div class="interviewRoundContainer">
+	<div class="interviewRoundHeader">
+		<div class="informationContainer" *ngIf="showInformationMessage">
+			<br>
+			<span class="heading1">{{informationMessage}}</span>
+			<br>
+		</div>
+		<div class="roundHeadings" 
+			*ngIf="!showInformationMessage">
+		    <span class="subHeading1">Rounds for {{levelName}}</span>
+		</div>
+        <div class="spacer" *ngIf="!showInformationMessage">
+        </div>
+        <div class="roundIcons"
+        	*ngIf="!showInformationMessage">
+            <mat-icon matTooltip="Add New Round" *ngIf="showAddRoundLink"
+                    (click)="showRoundDetails(newRound)">add_circle
+            </mat-icon>
+        </div>
+	</div>
+	<div class="roundContent" *ngIf="!showInformationMessage">
+		<div class="row">
+			<mat-form-field class="roundFields">
+				<mat-select placeholder="Interview Rounds"
+						[(ngModel)]="selectedRound"
+						(ngModelChange)="showRoundDetails($event)">
+					<mat-option *ngIf="interviewRoundList.length===0"
+							disabled="true"
+							value="">
+							No Rounds Found
+					</mat-option>
+					<mat-option *ngIf="interviewRoundList.length!==0"
+							disabled="true"
+							value="">
+							Select Rounds
+					</mat-option>
+					<mat-option *ngFor="let rounds of interviewRoundList"
+							[value]="rounds">
+						ROUND {{rounds.roundNumber}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+	</div>
+	<div class="mailSliderDiv"
+		*ngIf="(selectedRound || roundName===newRound) && !showInformationMessage">
+		<span class="spacer"></span>
+	    <mat-slide-toggle 
+		  matTooltip="Send interview update mails to Panellists"
+		  class="mailNotification"
+		  color="primary"
+		  [checked]="mailNotification"
+		  (change)="mailNotification=!mailNotification">
+		Mail Notification
+		</mat-slide-toggle>	
+	</div>
+	<div class="roundFormContainer" 
+		*ngIf="(selectedRound || roundName===newRound) && !showInformationMessage">
+		<div class="interviewRoundHeader">
+			<div class="roundHeadings">
+				<span class="subHeading2">{{roundName}}</span>
+			</div>
+			<div class="spacer"></div>
+			<div class="roundIcons" *ngIf="!roundFinished">
+		        <mat-icon matTooltip="Edit Level" *ngIf="interviewRoundForm.disabled"
+		                (click)="editRound()">edit
+		        </mat-icon>
+		    </div>
+		</div>
+		<div class="roundContent">
+			<div class="row">
+				<mat-form-field class="selectPanellists">
+					<mat-select placeholder="Panellists"[disabled]="interviewRoundForm.disabled"
+	                            [(ngModel)]="selectedPanellists"  
+	                            (ngModelChange)="createPanellistsObject($event)" [ngModelOptions]="{standalone: true}"      
+	                            multiple="true">
+	                    <mat-option value=null disabled="true">Add Panellists</mat-option>
+	                    <mat-option *ngFor=" let panelMember of panelMemberList" [value]="panelMember">{{panelMember.memberName}}</mat-option>
+	                </mat-select>				
+	            </mat-form-field>
+			</div>
+			<div>
+				<form [formGroup]="interviewRoundForm">
+					<div class="row">
+                        <mat-form-field class="roundFormFields">
+                            <input matInput [min]="currentDate" [matDatepicker]="picker" 
+                                    formControlName="interviewDate"
+                                    placeholder="Date Of Interview">
+                            <mat-datepicker-toggle matSuffix [for]="picker"  
+                                           [disabled]="interviewRoundForm.disabled"></mat-datepicker-toggle>
+                            <mat-datepicker #picker>
+                            </mat-datepicker>
+                        </mat-form-field>
+                        <div class="spacer"></div>
+                        <mat-form-field class="roundFormFields">
+							<mat-select placeholder="Interview Mode"
+										formControlName="modeOfInterview">
+			                    <mat-option value=null disabled="true">Select Mode</mat-option>
+			                    <mat-option value="F2F">F2F</mat-option>
+			                    <mat-option value="TEL">TEL</mat-option>
+			                    <mat-option value="WEB EX">WEB EX</mat-option>
+			                </mat-select>
+			            </mat-form-field>	
+		                <div class="spacer"></div>
+		                <mat-form-field class="roundFormFields">
+		                    <input matInput placeholder="Start Time" type="time"
+							formControlName="interviewStartTime">
+		                </mat-form-field>
+						<div class="spacer"></div>	            		
+		                <mat-form-field class="roundFormFields">
+		                    <input matInput placeholder="Finish Time" type="time"
+							formControlName="interviewFinishTime">
+		                </mat-form-field>						
+		            </div>
+					<div *ngIf="interviewRoundForm.enabled" class="row">
+					    <button type="submit" color="primary" mat-raised-button
+		                        (click)="cancel(roundName)">Cancel
+		                </button>
+		                <span>&nbsp;&nbsp;</span>
+					    <button type="submit" color="primary" mat-raised-button
+		                        [disabled]="interviewRoundForm.invalid" 
+		                        (click)="onSubmit()">{{buttonName}}
+		                </button>
+					</div>            				 
+				</form>				
+			</div>
+			<div class="roundButtons" *ngIf="roundFinished">
+			    <button color="primary" mat-raised-button 
+			    		(click)="showPanellistsFeedback()">View Panellist Feedbacks
+			    </button>
+			   	<button color="primary" mat-raised-button
+			   			(click)="showRoundDecision()">{{decisionButtonName}} Round Decision
+			    </button>				
+			</div>
+		</div>
+	</div>
+</div>

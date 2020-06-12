@@ -1,0 +1,28 @@
+<div class="card"   
+     [style.width]="width"
+     [style.height]="height"
+     [style.background]="backgroundColor"
+     [style.color]="fontColor"
+     [ngStyle]="fullScreenStyle">
+    <div class="card-header">
+        <span class="title">
+            {{cardTitle}}
+        </span>
+        <span class="spacer"></span>
+        <span class="buttonPanel">
+                <i class="material-icons right"
+                    *ngIf="!fullScreenFlag" 
+                   (click)="switchToFullScreen()">fullscreen
+                </i>
+                <i class="material-icons right"
+                    *ngIf="fullScreenFlag"
+                    (click)="switchToFullScreen()">fullscreen_exit
+                </i>
+            <i class="material-icons right" (click)="refreshComponent($event)">refresh</i>
+        </span>
+    </div>
+    <div class="card-body">
+        <ng-content select="[card-content]"></ng-content>
+    </div>
+</div>
+            

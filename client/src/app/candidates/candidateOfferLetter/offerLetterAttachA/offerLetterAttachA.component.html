@@ -1,0 +1,116 @@
+<h4 align="center"><u>Attachment A</u></h4><br/>
+    <h4 align="center">Compensation Schedule</h4><br/>
+    
+         <table border="0" cellspacing="4" cellpadding="0" style="width:100%"> 
+                <tbody>
+                <tr>
+                <td nowrap="" valign="bottom"width="40%" align="center" ><p><b>Description</b></p></td>
+                <td nowrap="" valign="bottom"width="30%" align="center"><p><b>Monthly</b></p></td>
+                <td nowrap="" valign="bottom"width="30%" align="center"><p><b>Annually</b></p></td>
+                </tr>
+                
+                <tr>
+                <td nowrap="" valign="bottom"width="40%" ><p>Basic Salary</p></td>
+                <td nowrap="" valign="bottom"width="30%"align="center" > <p>{{salaryBreakDown.basicSalary.monthly| number :'.2-2'}}</p></td>
+                <td nowrap="" valign="bottom" width="30%"align="center"> <p>{{salaryBreakDown.basicSalary.annually| number :'.2-2'}}</p></td>
+                </tr>
+                
+                <tr>
+                <td nowrap="" valign="bottom"width="40%"><p>House Rent Allowance</p></td>
+                <td nowrap="" valign="bottom"width="30%"align="center" ><p>{{salaryBreakDown.hra.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom"width="30%"align="center" ><p>{{salaryBreakDown.hra.annually| number :'.2-2'}}</p> </td>
+                </tr>
+                
+                  
+                <tr *ngIf="salaryBreakDown.conveyanceAllowance.monthly!=0 && salaryBreakDown.conveyanceAllowance.annually!=0">
+                <td nowrap="" valign="bottom" width="40%"><p>Conveyance Allowance</p></td>
+                <td nowrap="" valign="bottom" width="30%"align="center"><p>{{salaryBreakDown.conveyanceAllowance.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom" width="30%"align="center"><p>{{salaryBreakDown.conveyanceAllowance.annually| number :'.2-2'}}</p> </td>
+                </tr>
+                  
+                 
+                 
+               <tr *ngIf="salaryBreakDown.specialAllowance.monthly!=0&&salaryBreakDown.specialAllowance.annually!=0"> 
+                <td nowrap="" valign="bottom" width="40%"><p>Special Allowance</p></td>
+                <td nowrap="" valign="bottom" width="30%"align="center"><p>{{salaryBreakDown.specialAllowance.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom" width="30%"align="center" ><p>{{salaryBreakDown.specialAllowance.annually| number :'.2-2'}}</p> </td>
+                </tr> 
+                
+                <tr>
+                <td nowrap="" valign="bottom"width="40%"><p>Medical Reimbursement</p></td>
+                <td nowrap="" valign="bottom" width="30%"align="center"><p>{{salaryBreakDown.medicalReimbursement.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom"width="30%"align="center"><p>{{salaryBreakDown.medicalReimbursement.annually| number :'.2-2'}}</p> </td>
+                </tr>
+                
+                <tr *ngIf="salaryBreakDown.fuelAllowance.monthly!=0&&salaryBreakDown.fuelAllowance.annually!=0">
+                <td nowrap="" valign="bottom" width="40%"><p>Fuel Allowance</p></td>
+                <td nowrap="" valign="bottom" width="30%"align="center"><p>{{salaryBreakDown.fuelAllowance.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom" width="30%"align="center"><p>{{salaryBreakDown.fuelAllowance.annually| number :'.2-2'}}</p> </td>
+                </tr>
+                 
+                <tr>
+                <td nowrap="" valign="bottom"width="40%" ><p>Leave Travel Allowance</p></td>
+                <td nowrap="" valign="bottom"width="30%"align="center" ><p>{{salaryBreakDown.leaveTravelAllowance.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom" width="30%"align="center"><p>{{salaryBreakDown.leaveTravelAllowance.annually| number :'.2-2'}}</p> </td>
+                </tr>
+                
+                <tr>
+                <td nowrap="" valign="bottom"width="40%" ><p>Meal Allowance</p></td>
+                <td nowrap="" valign="bottom"width="30%"align="center" ><p>{{salaryBreakDown.mealAllowance.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom"width="30%"align="center" ><p>{{salaryBreakDown.mealAllowance.annually| number :'.2-2'}}</p> </td>
+                </tr>
+                
+                <tr>
+                <td nowrap="" valign="bottom"width="40%" ><p>Telephone Reimbursement</p></td>
+                <td nowrap="" valign="bottom"width="30%" align="center" ><p>{{salaryBreakDown.telephoneReimbursement.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom"width="30%"align="center" ><p>{{salaryBreakDown.telephoneReimbursement.annually| number :'.2-2'}}</p> </td>
+                </tr>
+
+                <tr>
+                <td nowrap="" valign="bottom"width="40%" ><p>Gift Allowance</p></td>
+                <td nowrap="" valign="bottom"width="30%" align="center" ><p>{{salaryBreakDown.giftAllowance.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom"width="30%" align="center" ><p>{{salaryBreakDown.giftAllowance.annually| number :'.2-2'}}</p> </td>
+                </tr>
+
+                <tr>
+                <td nowrap="" valign="bottom"width="40%" ><p>Academic Allowance</p></td>
+                <td nowrap="" valign="bottom"width="30%" align="center"><p>{{salaryBreakDown.academicAllowance.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom"width="30%" align="center"><p>{{salaryBreakDown.academicAllowance.annually| number :'.2-2'}}</p> </td>
+                </tr>
+
+                <tr>
+                <td nowrap="" valign="bottom"width="40%"  ><p>NPS</p></td>
+                <td nowrap="" valign="bottom"width="30%" align="center"><p>{{salaryBreakDown.nps1.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom"width="30%" align="center"><p>{{salaryBreakDown.nps1.annually| number :'.2-2'}}</p> </td>
+                </tr>
+                
+                <tr>
+                <td nowrap="" valign="bottom"width="40%" ><p>Gratuity</p></td>
+                <td nowrap="" valign="bottom" width="30%"align="center"><p>{{salaryBreakDown.gratuity.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom"width="30%" align="center"><p>{{salaryBreakDown.gratuity.annually| number :'.2-2'}}</p> </td>
+                </tr>
+                
+                <tr>
+                <td nowrap="" valign="bottom" width="40%"><p>Employer Contribution to Provident Fund</p></td>
+                <td nowrap="" valign="bottom"width="30%" align="center"><p>{{salaryBreakDown.employerContributiontoProvidentFund.monthly| number :'.2-2'}}</p> </td>
+                <td nowrap="" valign="bottom"width="30%" align="center"><p>{{salaryBreakDown.employerContributiontoProvidentFund.annually| number :'.2-2'}}</p> </td>
+                </tr>
+                
+                <tr>
+                <td nowrap="" valign="bottom" width="40%"><p>Annual Incentive</p></td>
+                <td nowrap="" valign="bottom" width="30%"align="center"> </td>
+                <td nowrap="" valign="bottom" width="30%"align="center"><p>{{offerLetterForm.costoffer.annualIncentive|number:'.2'}}</p> </td>
+                </tr>
+                
+                <tr>
+                <td nowrap="" valign="bottom"width="40%" ><p><b>Total Annual Compensation</b></p></td>
+                <td nowrap="" valign="bottom"width="30%"align="center" > </td>
+                <td nowrap="" valign="bottom"width="30%"align="center" ><p>{{offerLetterForm.costoffer.annualIncome | number:'.2'}}</p> </td>
+                </tr>
+                
+                </tbody>
+            </table> 
+<p style="text-align: justify;">Allowances and reimbursements can be structured as per Company policy and Government of India guidelines</p>
+<p style="text-align: justify;">Annual Incentive may be paid out once a year and is dependent on Employee’s performance against their targets and on the Company’s performance, and is based on the sole discretion of the Employer. Therefore the actual Annual Incentive payout may vary.</p>
+<p style="text-align: justify;">The Annual Compensation is subject to statutory deductions, including income tax and provident fund, as required under law.</p>
+            

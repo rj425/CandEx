@@ -1,0 +1,34 @@
+<cardContainer cardTitle="Cost Per Hire" 
+    height='250px' 
+    width='506px'
+    (refreshEvent)="refreshComponent($event)">
+    <div card-content>
+        <div *ngIf="jsonResponse.length===0" class="informationMessage">
+            No Data Available!
+        </div>
+        <table class="table" *ngIf="jsonResponse.length!==0">
+            <thead>
+                <tr>
+                    <th>Candidate</th>
+                    <th>Relocation Cost</th>
+                    <th>Settling-in Cost</th>
+                    <th>Joining Bonus</th>
+                    <th>Salary</th>
+                    <th>Agency Cost</th>
+                    <th>Referral</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let obj of jsonResponse ">
+                    <td>{{obj.personal.firstName}} {{obj.personal.lastName}}</td>
+                    <td>{{obj.candidateCost.relocationCost}}</td>
+                    <td>{{obj.candidateCost.settlingCost}}</td>
+                    <td>{{obj.candidateCost.joiningBonus}}</td>
+                    <td>{{obj.candidateCost.salary}}</td>
+                    <td>{{obj.candidateCost.agencyCost}}</td>
+                    <td>{{obj.candidateCost.referralCost}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</cardContainer>

@@ -1,0 +1,175 @@
+<div class="container">
+    <div class="level">
+        <div class="interviewLevelContainer">
+            <div class="interviewLevelHeader">
+                <div class="levelHeadings">
+                    <span class="subHeading1">Interview Levels for</span>
+                    <span class="subHeading2">{{candidateName}}</span>
+                </div>
+                <div class="spacer">
+                </div>
+                <div class="levelIcons">
+                    <mat-icon matTooltip="Add New Level" *ngIf="showAddLevelLink"
+                            (click)="showLevelDetails(newLevel)">add_circle
+                    </mat-icon>
+                    <mat-icon matTooltip="Show Interview Process Timeline"
+                            (click)="showInterviewTimeline()">timeline
+                    </mat-icon>
+                </div>
+            </div>  
+            <div class="levelContent">
+                <mat-form-field class="levelFields">
+                    <mat-select placeholder="Interview Levels"
+                                [(ngModel)]="selectedLevel" (ngModelChange)="showLevelDetails($event)">
+                        <mat-option *ngIf="interviewLevelList.length===0" 
+                                disabled="true" 
+                                value="">No Levels Found
+                        </mat-option>
+                        <mat-option *ngIf="interviewLevelList.length!==0" 
+                                disabled="true" 
+                                value="">Select Level
+                        </mat-option>
+                        <mat-option [value]="level" 
+                                *ngFor="let level of interviewLevelList">{{level.levelOfInterview}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field>
+                <div *ngIf="candidateOffer!==null" class="labelValue">
+                    <div class="label">
+                        <label>Hiring Decision Date : </label>
+                    </div>
+                    <div class="value">
+                        {{candidateOffer.hiringDecisionDate}}
+                    </div>
+                </div>
+                <br>
+                <div *ngIf="candidateOffer!==null" class="labelValue">
+                    <a [routerLink]="['/editCandidate/'+candidateID+'/4']">
+                    <button mat-raised-button color="primary">
+                        Set offer & cost details
+                    </button>
+                    </a>
+                </div>
+                
+            </div>
+            <button mat-raised-button *ngIf="showHiringDecisionSection"
+                        color="primary"
+                        (click)="showHiringDecisionDialog()">Set Hiring Decision Date
+            </button>
+        </div>
+        <br>
+        <div class="levelFormContainer" *ngIf="showLevelFormFlag">
+            <div class="interviewLevelHeader">
+                <div class="levelHeadings">
+                    <span class="subHeading1">{{levelName}}</span>
+                </div>
+                <div class="spacer"></div>
+                <div class="levelIcons" *ngIf="!freezeLevelForm">
+                    <mat-icon matTooltip="Edit Level" (click)="editLevel()" *ngIf="scheduleInterviewForm.disabled">edit
+                    </mat-icon>
+                </div>
+            </div>
+            <div class="levelContent">
+                <form [formGroup]="scheduleInterviewForm">
+                    <div class="labelValue" *ngIf="selectedLevel.firstNoShowDate" >
+                        <div class="label">
+                            <label>1st No-Show : </label>
+                        </div>
+                        <div class="value">
+                            {{selectedLevel.firstNoShowDate}}
+                        </div>
+                    </div>
+                    <br *ngIf="selectedLevel.firstNoShowDate && !selectedLevel.secondNoShowDate">
+                    <div class="labelValue" *ngIf="selectedLevel.secondNoShowDate">
+                        <div class="label">
+                            <label>2nd No-Show : </label>
+                        </div>
+                        <div class="value">
+                            {{selectedLevel.secondNoShowDate}}
+                        </div>
+                    </div>
+                    <br *ngIf="selectedLevel.secondNoShowDate">  
+                    <div>
+                        <mat-form-field class="levelFields" *ngIf="levelName==newLevel">
+                            <mat-select placeholder="Level Of Interview"
+                                        formControlName="levelOfInterview">
+                                <mat-option disabled="true" value="">Select Level Name</mat-option>
+                                <mat-option *ngFor="let levelName of newLevelNameList" [value]="levelName">{{levelName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="levelFields">
+                            <input matInput [min]="currentDate" [matDatepicker]="picker" 
+                                    formControlName="interviewDate"
+                                    placeholder="Date Of Interviews">
+                            <mat-datepicker-toggle matSuffix [for]="picker"  
+                                           [disabled]="scheduleInterviewForm.disabled">
+                           </mat-datepicker-toggle>
+                            <mat-datepicker #picker>
+                            </mat-datepicker>
+                        </mat-form-field>
+                        <mat-checkbox  class="checkbox" color="primary" formControlName="isFinal">Final Level
+                        </mat-checkbox>
+                        <div *ngIf="selectedLevel && scheduleInterviewForm.disabled">
+                            <br>
+                            <div class="labelValue">
+                                <div class="label">
+                                    <label>Level Status : </label>
+                                </div>
+                                <div class="value">
+                                    {{this.selectedLevel.levelDecision}}
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                       <div *ngIf="scheduleInterviewForm.enabled">
+                            <br>
+                            <button *ngIf="levelName===newLevel" 
+                                    mat-raised-button type="submit" 
+                                    class="submitButton" 
+                                    color="primary"
+                                    [disabled]="scheduleInterviewForm.invalid"
+                                    (click)="onSubmit(scheduleInterviewForm.value,newLevel)">Add Rounds
+                            </button>
+                            <button *ngIf="levelName!==newLevel" 
+                                    mat-raised-button type="submit" 
+                                    class="submitButton" 
+                                    color="primary"
+                                    [disabled]="scheduleInterviewForm.invalid"
+                                    (click)="onSubmit(scheduleInterviewForm.value)">Update
+                            </button>
+                            <button mat-raised-button
+                                    class="submitButton" 
+                                    color="primary"
+                                    (click)="cancelEditMode()">Cancel
+                            </button>
+                        </div>
+                        <div *ngIf="showLevelStatusButton">
+                            <button mat-raised-button
+                                    class="submitButton" 
+                                    color="primary"
+                                    (click)="showLevelStatusDialog()">Update Level Status
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="round" *ngIf="showInterviewRoundFormFlag">
+        <interviewRound [levelName]="levelName" 
+                        [interviewRoundList]="interviewRoundList"
+                        [interviewDate]="selectedLevel.interviewDate"
+                        [levelID]="selectedLevel.levelID"
+                        [candidateID]="candidateID"
+                        [candidateName]="candidateName"
+                        [levelStatus]="selectedLevel.levelDecision"
+                        [firstNoShow]="selectedLevel.firstNoShowDate"
+                        [secondNoShow]="selectedLevel.secondNoShowDate"
+                        (updateLevelInfo)="updateInterviewLevelList($event.status,$event.response)">
+        </interviewRound>
+    </div>
+</div>
+
+
+
+

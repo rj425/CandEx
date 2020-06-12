@@ -1,0 +1,36 @@
+/deep/ .mat-dialog-container{
+
+	border-radius: 12px;
+}
+
+.errorLogs{
+    overflow-y: auto;
+    height: 450px;
+    padding-right: 10px;
+}
+
+table {
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    font-size: 15px;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color:#dddddd;
+}
+
+.informationContainer{
+
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+    display: flex;
+    justify-content: center;  
+    color: #909090;
+    font-size: 40px;
+}

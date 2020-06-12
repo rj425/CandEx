@@ -1,0 +1,72 @@
+.container{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 15px;
+}
+
+
+.mainHeading{
+    align-self: flex-start;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.section{
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.row{
+    display:flex;
+    flex-direction: row;
+    width:80%;
+}
+
+.spacer {
+/*    flex: flex-grow flex-shrink flex-basis*/
+    flex: 1 1 auto;
+}
+.spacing{
+    flex-basis:auto;
+}
+.formFields{
+    width: 180px;
+}
+
+
+.submitButton{
+    width: 180px;
+}
+
+mat-icon{
+    cursor: pointer;
+    color: grey;
+    margin-top: 15px;
+    size:small;
+}
+
+mat-checkbox{
+    line-height: 10px;
+}
+select {
+    height: 100%;
+    width: 400px;
+}
+.grid {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+

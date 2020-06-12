@@ -1,0 +1,75 @@
+<div class="basicCharts">
+    <div class="basic-cards">
+        <div class="card box3 darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">Requests</span>
+                <table *ngIf="requestData">
+                    <tr>
+                        <td class="rowHeading1">Total Requests</td>
+                        <td>{{requestData.totalRequests}}</td>
+                    </tr>
+                    <tr>
+                        <td>Active Requests</td>
+                        <td>{{requestData.activeRequests}}</td>
+                    </tr>
+                    <tr>
+                        <td>Closed Requests</td>
+                        <td>{{requestData.closedRequests}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <img src="assets/chart-1.svg" alt="Chart" />
+    </div>
+    <div class="basic-cards">
+        <div class="card box2 darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">Candidates</span>
+                <table *ngIf="candidateData">
+                    <tr>
+                        <td class="rowHeading1">Total Candidates</td>
+                        <td>{{candidateData.totalCandidates}}</td>
+                    </tr>
+                    <tr> 
+                        <td>Candidates Offered</td>
+                        <td>{{candidateData.candidatesOffered}}</td>
+                    </tr>
+                    <tr>
+                        <td>Candidates Joined</td>
+                        <td>{{candidateData.candidatesJoined}}</td>
+                    </tr>
+                    <tr>
+                        <td>Candidates Dropped</td>
+                        <td>{{candidateData.candidatesDropped}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <img src="assets/chart-3.svg" alt="Chart" />
+    </div>
+
+    <div class="basic-cards">
+        <div class="card box1 darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">Process Time</span>
+                <table class="centered" *ngIf="processData">
+                    <thead>
+                        <tr>
+                            <th class="rowHeading2">Level Name</th>
+                            <th>Average Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let levelName of processData | key">
+                            <td>{{levelName}}</td>
+                            <td>
+                                {{processData[levelName]}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <img src="assets/chart-2.svg" alt="Chart" />
+    </div>
+</div>

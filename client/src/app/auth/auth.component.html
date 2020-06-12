@@ -1,0 +1,27 @@
+<div class="container">
+    <mat-card>
+        <form [formGroup]="authForm">
+            <br>
+            <span>
+                <mat-icon color="primary">account_circle</mat-icon>
+                <span>&nbsp;&nbsp;</span>
+                <mat-input-container>
+                    <input matInput placeholder="Username" formControlName="username">
+                </mat-input-container>
+            </span>
+            <br>
+            <span>
+                <mat-icon color="primary">lock</mat-icon>
+                <span>&nbsp;&nbsp;</span>
+                <mat-input-container>
+                    <input matInput placeholder="Password" formControlName="password" type="password">
+                </mat-input-container>
+            </span>
+            <br><br>
+            <button type="submit" color="primary" mat-raised-button (click)="authenticate()" 
+                    [disabled]="!authForm.valid">LOGIN</button>
+            <br>
+        </form>
+    </mat-card>
+</div>
+

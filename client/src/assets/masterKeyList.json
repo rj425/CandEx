@@ -1,0 +1,11 @@
+{
+	"sources":["sourceID", "source", "status", "createdDate", "modifiedDate"],
+	"institutions":["institutionID", "institutionName", "status", "createdDate", "modifiedDate"],
+	"department":["departmentID", "departmentName", "departmentManager", "departmentManagerEmail", "status", "createdDate", "modifiedDate"],
+	"courses":["courseID", "courseName", "status", "createdDate", "modifiedDate"],
+	"panelMembersDirectory":["memberID", "memberName", "memberEmail", "createdDate", "modifiedDate"],
+	"designation":["designationID", "designation", "status", "createdDate", "modifiedDate"],
+	"position":["positionID", "position", "status", "createdDate", "modifiedDate"],
+	"skills":["skillID", "skill", "status", "createdDate", "modifiedDate"],
+	"engagementActions":["actionID", "actionName", "createdDate", "modifiedDate"] 
+}

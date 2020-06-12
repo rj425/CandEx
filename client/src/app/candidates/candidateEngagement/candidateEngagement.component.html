@@ -1,0 +1,88 @@
+<div class="container" *ngIf="candidate">
+    <span class="mainHeading">Candidate Engagement Plan</span>
+    <br>
+    <div class="mainRow">
+        <div>
+            <div class="row">
+                <div class="labelValue">
+                    <span class="label">Candidate Name</span>
+                    <span class="value">{{candidate.personal.firstName}} {{candidate.personal.lastName}}</span>
+                </div>
+                <div class="labelValue" *ngIf="candidate.offer">
+                    <span class="label">Offer Date</span>
+                    <span class="value">{{candidate.offer.offerDate}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="labelValue">
+                    <span class="label">Notice Period</span>
+                    <span class="value">{{noticePeriod}} Days</span>
+                </div>
+                <div class="labelValue" *ngIf="candidate.offer">
+                    <span class="label">Joining Date</span>
+                    <span class="value">{{candidate.offer.joiningDate}}</span>
+                </div>
+            </div>
+        </div>
+        <button mat-raised-button color="primary"
+                class="addReminderButton" 
+                (click)="addAction()">
+                Add Reminder
+        </button>            
+    </div>
+    <br><br>
+    <form *ngIf="formCreated" [formGroup]="engagementForm" >
+        <div formArrayName="engagements">
+            <div *ngFor="let engagement of engagementForm.controls.engagements.controls;let i=index">
+                <div formGroupName={{i}} class="row">
+                    <mat-form-field class="formFields wide">
+                        <input matInput
+                                placeholder="Responsibility Holder Email" 
+                                formControlName="responsibilityHolder">
+                    </mat-form-field>
+                    <span class="spacer"></span>
+                    <mat-form-field class="formFields extraWide">                    
+                        <mat-select placeholder="Action" formControlName="action">
+                            <mat-option value=null disabled="true">Select action</mat-option>
+                            <mat-option *ngFor="let actionItem of actionList" [value]="actionItem">
+                                {{actionItem.actionName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>  
+                    <span class="spacer"></span>
+                    <mat-form-field class="formFields">
+                       <input matInput 
+                                [matDatepicker]="picker"
+                                [min]="candidate.offer.offerDate"
+                                [max]="candidate.offer.joiningDate"
+                                placeholder="Due Date" 
+                                formControlName="dueDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <span class="spacer"></span>
+                    <mat-form-field class="formFields">                    
+                        <mat-select placeholder="Action Status" formControlName="status">
+                            <mat-option value=null disabled="true">Select Status</mat-option>
+                            <mat-option *ngFor="let status of statusList" [value]="status.value">{{status.key}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>  
+                    <span class="spacer"></span>
+                    <mat-icon class="removeIcon" (click)="removeAction(i)">cancel</mat-icon>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <button mat-raised-button
+                    *ngIf="engagementForm!=null?engagementForm.controls.engagements.length!=0:false"
+                    [disabled]="!engagementForm.valid" 
+                    type="submit" 
+                    color="primary"
+                    (click)="submitForm()">
+                    Add
+            </button>
+        </div>
+        <br><br>
+    </form>
+</div>

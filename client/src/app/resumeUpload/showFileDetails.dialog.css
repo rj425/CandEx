@@ -1,0 +1,15 @@
+/deep/ .mat-dialog-container{
+
+	border-radius: 12px;
+}
+
+svg.nvd3-svg{
+    margin: auto !important;
+}
+.row{
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+    display: flex;
+    font-size: 15px;
+    flex-direction:row;
+
+}

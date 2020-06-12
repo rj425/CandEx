@@ -1,0 +1,45 @@
+<chartContainer
+  chartTitle="Past Employer"
+  dataTableTitle="Past Employer"
+  width="406px"
+  height="250px"
+  [showFilterIcon]="showFilterIcon"
+  (maximizeEvent)="resizeChart($event)"  
+  (refreshEvent)="refreshComponent($event)">
+    <nvd3 chart [data]="data" [options]="options"></nvd3>    
+    <div dataTable>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Past Employer</th>
+                    <th>No. of Candidates</th>
+                    <th *ngIf="fullScreenFlag">Candidate ID's</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let obj of jsonResponse ">
+                    <td>{{obj.label}}</td>
+                    <td>{{obj.data.length}}</td>
+                    <td *ngIf="fullScreenFlag">
+                        <div class="candidateIDsList">
+                            <div>
+                                <ul *ngFor="let candidate of obj.data;let i=index">
+                                    <li *ngIf="i<(obj.data.length/2)">
+                                        <a (click)="viewCandidate(candidate.candidateID)"><u>CAND-{{candidate.candidateID}}</u></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul *ngFor="let candidate of obj.data;let i=index">
+                                    <li *ngIf="i>=(obj.data.length/2)">
+                                        <a (click)="viewCandidate(candidate.candidateID)"><u>CAND-{{candidate.candidateID}}</u></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</chartContainer>

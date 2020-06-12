@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Want to drop this candidate ?</h2>
+<div class="labelValue">
+    <div class="label">
+        <label>Candidate Name : </label>
+    </div>
+    <div class="value">{{candidateName}}
+    </div>
+</div>
+<br>
+<mat-form-field class="dropReason">
+	<textarea matInput placeholder="If Yes Please Provide The Reason" 
+			  maxlength="200"
+			  matTooltip="Max Length is 200 characters." 
+			  [(ngModel)]="dropReason">
+	</textarea>
+</mat-form-field>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close="null">No</button>
+  <button mat-button [mat-dialog-close]="dropReason"
+          [disabled]="dropReason==null">Yes</button>
+</mat-dialog-actions>
+
+

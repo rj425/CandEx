@@ -1,0 +1,15 @@
+<div *ngIf="recievedForm">
+    <h2 mat-dialog-title>{{actionName}} {{selectionName}}</h2>
+    <form  novalidate [formGroup]="recievedForm" (ngSubmit)="onSubmit()">
+        <div *ngFor="let x of formControl">
+            <mat-form-field class="formFields">
+            <input matInput placeholder="{{x|keys}}" type="text" class="validate" [formControlName]=x/>
+            </mat-form-field>
+        </div>
+        <br>
+        <mat-dialog-actions>
+          <button mat-button mat-dialog-close="null">Cancel</button>
+          <button mat-button [disabled]="recievedForm.invalid">{{actionName}}</button>
+        </mat-dialog-actions>
+    </form> 
+</div>

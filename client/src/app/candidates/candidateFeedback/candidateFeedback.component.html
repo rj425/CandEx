@@ -1,0 +1,35 @@
+<div class="container" *ngIf="!showError">
+	<div class="row" >
+	<span class="mainHeading">ViaSat Inc. Interview Process Feedback</span>
+	</div>
+	<br><br>
+	<div class="description">
+	Thank you for interviewing at ViaSat Inc.<br>
+	We would love to hear your thoughts regarding the process conducted at our company.Do spare a few minutes for the same.
+	</div>
+	<br>
+		
+	<form [formGroup]="feedbackForm">
+	<div class="row">
+	
+	<mat-form-field class="formFields">
+		<textarea matInput placeholder="Feedback" matTextareaAutosize matAutosizeMinRows="10" formControlName="feedback"></textarea>
+	</mat-form-field>
+		
+	</div>
+	<div class="row" *ngIf="!feedbackSumitted">
+	<button mat-raised-button 
+			type="submit"
+			class="submitButton"
+			color="primary" 
+			(click)="onSubmit()">
+		Submit
+	</button>
+	</div>
+	<div class="description" *ngIf="feedbackSumitted"> 
+		<b>Thank you for submitting your valuable feedback!</b>
+	</div>
+	</form>
+</div>
+
+

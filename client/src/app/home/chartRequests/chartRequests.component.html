@@ -1,0 +1,66 @@
+<chartContainer
+        chartTitle="Mapped Candidates"
+        dataTableTitle="Mapped Candidates"
+        width="406px"
+        height="250px"
+        [showFilterIcon]="showFilterIcon"
+        (maximizeEvent)="resizeChart($event)"
+        (refreshEvent)="refreshComponent($event)">
+        <nvd3 chart [options]="options" [data]="data"></nvd3>
+        <div dataTable>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Request ID</th>
+              <th>Offered Candidates</th>
+              <th *ngIf="fullScreenFlag">Candidate ID (Offered)</th>
+              <th>Not Offered Candidates</th>
+              <th *ngIf="fullScreenFlag">Candidate ID (Not Offered)</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let obj of offered;let i=index">
+                <td>REQ-{{offered[i].label}}</td>
+                <td>{{offered[i]['candidates'].length}}</td>
+                <td *ngIf="fullScreenFlag">
+                    <div class="candidateIDsList">
+                        <div>
+                            <ul *ngFor="let candidate of offered[i]['candidates'];let i=index">
+                                <li *ngIf="i<(offered[i]['candidates'].length/2)">
+                                    <a (click)="viewCandidate(candidate.candidateID)"><u>CAND-{{candidate.candidateID}}</u></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                          <ul *ngFor="let candidate of offered[i]['candidates'];let i=index">
+                                <li *ngIf="i>=(offered[i]['candidates'].length/2)">
+                                    <a (click)="viewCandidate(candidate.candidateID)"><u>CAND-{{candidate.candidateID}}</u></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td>{{notOffered[i]['candidates'].length}}</td>
+                <td *ngIf="fullScreenFlag">
+                    <div class="candidateIDsList">
+                        <div>
+                            <ul *ngFor="let candidate of notOffered[i]['candidates'];let i=index">
+                                <li *ngIf="i<(notOffered[i]['candidates'].length/2)">
+                                    <a (click)="viewCandidate(candidate.candidateID)"><u>CAND-{{candidate.candidateID}}</u></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                          <ul *ngFor="let candidate of notOffered[i]['candidates'];let i=index">
+                                <li *ngIf="i>=(notOffered[i]['candidates'].length/2)">
+                                    <a (click)="viewCandidate(candidate.candidateID)"><u>CAND-{{candidate.candidateID}}</u></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+               </tr>
+            </tbody>
+          </table>
+        </div>            
+ </chartContainer>

@@ -1,0 +1,242 @@
+<div class="container">
+<div *ngIf="showAll==false">
+<div class=headerRow>
+  <span class="mainHeading">Offer Letter Data Entry</span>
+  <span class="spacer"></span>
+  <mat-slide-toggle 
+      color="primary"
+      class="reviseOfferLetter"
+      [checked]="reviseOfferLetter"
+          (change)="reviseOfferLetter=!reviseOfferLetter">Revise Offer Letter</mat-slide-toggle>
+</div>
+  <br>
+  <form [formGroup]="offerletterForm" (ngSubmit)="onSubmit()">
+     <br>
+      <div class="sub-header">Personal Details</div>
+      <br>
+      <div formGroupName="personal" class="section">
+          <div class="row">
+              <mat-form-field class="personalFields">
+                  <input matInput placeholder="First Name" type="text" class="validate" formControlName="firstName">
+              </mat-form-field>
+              <span class="spacer"></span>
+              <mat-form-field class="personalFields">
+                  <input matInput placeholder="Last Name" type="text" class="validate" formControlName="lastName">
+              </mat-form-field>
+              <span class="spacer"></span>
+              <div class="personalFields"></div>
+              <span class="spacer"></span>
+              <div class="personalFields"></div>
+              <span class="spacer"></span>
+            </div> 
+
+          <div class="row">
+              <br>
+               <mat-form-field class="personalFields">
+                  <input matInput placeholder="Door No &Street Name" type="text" class="validate" formControlName="permanentAddress1">
+              </mat-form-field>
+              <span class="spacer"></span>
+              <mat-form-field class="personalFields">
+                <input matInput placeholder="Town/City" type="text" class="validate" formControlName="permanentAddress2">
+            </mat-form-field>
+            <span class="spacer"></span>
+            <mat-form-field class="personalFields">
+                <input matInput placeholder="State" type="text" class="validate" formControlName="permanentAddress3">
+            </mat-form-field>
+            <span class="spacer"></span>
+            <mat-form-field class="personalFields">
+                <input matInput  placeholder="Pincode" type="number"  class="validate" formControlName="permanentAddress4">
+            </mat-form-field>
+            <span class="spacer"></span>
+            </div>
+      </div>
+      <br>
+      <div class="sub-header">Cost & Offer Details</div>
+      <br>    
+      <div formGroupName="costoffer" class="section">
+          <div class="row">
+              <mat-form-field class="costofferFields">
+                  <input matInput placeholder="Job Title" type="text" class="validate" formControlName="jobTitle">
+              </mat-form-field>
+              <span class="spacer"></span>  
+              <mat-form-field class="costofferFields">
+
+                <input matInput placeholder="Supervisor Title" type="text" class="validate" formControlName="supervisorTitle">
+              </mat-form-field>
+            <span class="spacer"></span>
+            <mat-form-field>
+                <mat-select placeholder="Notice Periods" formControlName="noticePeriod">
+                    <mat-option value="4 Weeks">4 Weeks</mat-option>
+                    <mat-option value="8 Weeks">8 Weeks</mat-option>
+                    <mat-option value="12 Weeks">12 Weeks</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span class="spacer"></span>  
+        </div>
+        <div class="row">
+                <mat-form-field class="costofferFields">
+                        <input matInput [max]="maxDate" [matDatepicker]="picker1" placeholder="Offer Date" formControlName="offerDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                   </mat-form-field>
+                   <span class="spacer"></span> 
+                   <mat-form-field class="costofferFields">
+                        <input matInput [min]="this.offerletterForm.value.costoffer.offerDate" [max]="maxDate"[matDatepicker]="picker2" placeholder="Offer Acceptance Date" formControlName="offerAcceptanceDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                   </mat-form-field>
+                   <span class="spacer"></span>
+                <mat-form-field class="costofferFields">
+                        <input matInput [min]="this.offerletterForm.value.costoffer.offerAcceptanceDate" [matDatepicker]="picker4" placeholder="Start Date" formControlName="startDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                        <mat-datepicker #picker4></mat-datepicker>
+                </mat-form-field>
+                <span class="spacer"></span> 
+        </div>
+        <div class="row">
+                <mat-form-field class="costofferFields" >
+                    <input matInput placeholder="Annual Income" type="number" class="validate" formControlName="annualIncome">
+                </mat-form-field>           
+                <span class="spacer"></span>
+                <mat-form-field class="costofferFields">
+                     <input matInput placeholder="Annual Incentive" type="number" class="validate" formControlName="annualIncentive">
+                </mat-form-field>           
+                <span class="spacer"></span>
+             <div class="costofferFields"></div>
+             <span class="spacer"></span>
+        </div>
+       
+    </div> 
+    <br>
+        <button mat-raised-button type="submit"  class="submitButton" [disabled]="offerletterForm.invalid"
+         color="primary">Generate Offer Letter
+        </button>
+</form>
+</div>
+</div>
+
+<div *ngIf="showAll==true"> 
+     <div class="container">
+            <span class="mainHeading" style="margin-left:7%">Offer Letter & Attachments</span> <br/><br/>
+            <div class="alignrow">
+                <mat-form-field>
+                        <mat-select placeholder="Select Approver"
+                                    [(ngModel)]="selectedValue">
+                        <mat-option value="Sathya">Sathya Narayanswamy</mat-option>
+                        <mat-option value="Melinda">Melinda Del Toro</mat-option>
+                        </mat-select>                
+                </mat-form-field>
+                <span class="spacer"></span>
+                <div *ngIf="selectedValue===undefined">
+                        <button mat-raised-button color="accent" disabled="selectedValue==undefined">Upload & Apply Signature</button>
+                </div>    
+                <div *ngIf="selectedValue!==undefined" class="upload-btn-wrapper">
+                    <button mat-raised-button color="accent">Upload Signature</button>
+                    <input type="file" name="myfile" (change)="createMapping($event.target.files,selectedValue)" 
+                                accept="image/x-png,image/gif,image/jpeg">                
+                    <span class="spacer"></span>
+                </div> 
+            </div>
+             <div class="bPanel">
+                <i class="material-icons right"  matTooltip="Go Back" (click)="goToGenerateOfferletter()">arrow_back</i>&nbsp;&nbsp;
+                <i class="material-icons right"  matTooltip="Print & Save" (click)="onPrint()">print</i>        
+                <span class="spacer"></span>
+                <i class="material-icons right"  matTooltip="Offer Letter" (click)="goToShowOfferLetter()">home</i>&nbsp;&nbsp;                    
+                <i class="material-icons right"  matTooltip="Attachment 1" (click)="goToShowAttachmentA()">looks_one</i>&nbsp;&nbsp;
+                <i class="material-icons right"  matTooltip="Attachment 2" (click)="goToShowAttachmentB()">looks_two</i>&nbsp;&nbsp;
+                <i class="material-icons right"  matTooltip="Attachment 3" (click)="goToShowAttachmentC()">looks_3</i>&nbsp;&nbsp;
+            </div>
+    </div>
+<br> 
+<div id="maincontainer"style="margin:auto;
+                        position: relative;
+                        font-family:Times New Roman;
+                        font-size: 12;
+                        width: 80%;
+                        border: solid 1px black;
+                        border-radius: 1px;"> 
+
+<div class="print-section"style="size:8.27in 11.69in; 
+                                 margin:.5in .5in .5in .5in;">
+
+<div *ngIf="reviseOfferLetter">
+        <p style="color: red ;text-align:center"><b>**REVISED**</b></p>
+</div>
+<div *ngIf="showOfferLetter==true"> 
+        <div style="display:flex;justify-content:center">
+              <img src="assets/letterlogo2.jpg" style="height:61.35px;width:185.25px;margin-left:auto;margin-right:auto">
+        </div>
+                <p style="text-align:center"><b>VIASAT INDIA PRIVATE LIMITED</b></p>
+                <p style="text-align:center"><b>MODULE 1 & 2, 5TH FLOOR, BLOCK C, SP INFOCITY, NO 40, MGR SALAI, </b></p>
+                <p style="text-align:center"><b>KANDANCHAVADI, PERUNGUDI, CHENNAI 600096</b></p>
+                <p style="text-align:center"><b>{{offerDate | date:'longDate'}}</b></p>
+                <p style="text-align: justify;">&nbsp;</p>
+                <p style="text-align: justify;"><b>{{this.offerletterForm.value.personal.firstName}}&nbsp;{{this.offerletterForm.value.personal.lastName}}<br/>{{this.offerletterForm.value.personal.permanentAddress1}},<br/>{{this.offerletterForm.value.personal.permanentAddress2}},<br/>{{this.offerletterForm.value.personal.permanentAddress3}}-{{this.offerletterForm.value.personal.permanentAddress4}}</b></p>
+                <p style="text-align: justify;">&nbsp;</p>
+                <p style="text-align: justify;">Dear <b>{{this.offerletterForm.value.personal.firstName}}&nbsp;{{this.offerletterForm.value.personal.lastName}},</b></p>
+                <ol style="text-align: justify;">
+                    <li>ViaSat India Private Limited (the “Company”), with its Registered Office at 507, Bhikaji Cama Bhawan, Bhikaji Cama Place, New Delhi - 110066, is pleased to offer you employment on the terms described below.</li><br/>
+                    <li><b><u>Position:</u></b> You will start in a full-time position as <b>{{ this.offerletterForm.value.costoffer.jobTitle}}</b>, and you will initially report to the Company’s {{ this.offerletterForm.value.costoffer.supervisorTitle}}. By signing this contract (the “Agreement”), you agree to the terms and conditions contained herein and you also confirm that you are under no contractual or other legal obligations that would prohibit you from fully performing your duties with the Company.</li><br/>
+                    <li><b><u>Compensation:</u></b> You will be paid <b>INR {{ this.offerletterForm.value.costoffer.annualIncome | number :'.0'}}</b> per year in Total Annual Compensation. Your salary is more precisely described in the enclosed Compensation Schedule (see Attachment A), the terms of which are incorporated herein by reference.  Your compensation is payable in Indian Rupees on the Company’s regular payroll dates, which are payable monthly, in arrears on the last working day of each month.   Electronic payslips may be issued to you rather than paper copies.  Your pay will be periodically reviewed as a part of the Company’s regular reviews of compensation, but the Company is not obligated to increase your pay, subject to applicable law. Your compensation includes specific compensation for adhering to the restrictions herein contained and for assignment of intellectual property rights as set out herein and in the Employee Proprietary Information and Invention Assignment Agreement.</li><br/>
+                <ol style="text-align: justify;"type="a">
+                    <li><b><u>Withholding and Deductions:</u></b> All forms of compensation referred to in this Agreement, Attachment A, or otherwise paid to you in relation to your employment by the Company are subject to applicable withholding and payroll taxes.  In addition, to the extent permitted by applicable law, the Company may deduct from your compensation, or other payments due to you, any money that you owe to the Company.</li><br/>
+                </ol>
+                <div class="page-break" style="display: block; page-break-before:always;page-break-inside:avoid; page-break-after:auto"></div>
+                    <li><b><u>Start Date and Probationary Period:</u></b> Subject to your satisfying the conditions in Section 8 below, your employment with the Company will start no later than <b>{{ this.offerletterForm.value.costoffer.startDate|date:'longDate'}}</b> (the “Start Date”). The first six (6) calendar months of your employment shall be a probationary period during which your performance and suitability for continued employment will be assessed.  During the probationary period, the Company may terminate your employment at any time with two (2) weeks’ advance notice or pay in lieu of notice.</li><br/>
+                    <li><b><u>Place of and Hours of Work:</u></b> Your normal place of work will be at the Company’s offices located in Chennai.  You also agree to travel to and work at such other places, throughout India and the rest of the world, as the Company may require for the proper and efficient performance of your duties.  Your work schedule will be set by your manager in accordance with applicable law and may change from time to time based on business needs. Additionally, you will be expected to be flexible in your work schedule, which may include shift hours.  Any overtime worked will be deemed already compensated by the above base salary and is included therein.  If applicable, you may be eligible for a devOps allowance, as more fully described in the Company’s ViaGuide.  Your eligibility for and participation in the devOps allowance is solely at the discretion of the Company, and may change at any time.</li><br/>
+                    <li><b><u>Employee Benefits:</u></b> As an employee of the Company, you will be eligible to participate in the employee benefit plans, if any, currently and hereafter maintained by the Company and generally available to similarly situated employees of the Company in India (the “Benefits”).  The Benefits may have additional terms and conditions and eligibility criteria.  The Company may modify or terminate certain Benefits from time to time as it deems necessary or appropriate. Your rights under any employee benefit plans in which you participate from time to time shall be exclusively governed by the rules of such plans.  You shall have no rights under this Agreement or any other agreement, whether on termination, expiry, or otherwise, to any damages relating to the loss of any Benefits, or the loss of any rights or privileges that you may have otherwise received had you continued to have been employed.</li><br/>
+                    <li><b><u>Vacation/Paid Time Off:</u></b> You will be entitled to annual leave in accordance with the Company’s policies, but in no case less than the applicable statutory minimum. You are expected to take any statutory leave prior to the end of each calendar year. Any statutory leave not taken by the end of the year shall be forfeited, subject to applicable law. In addition, you are entitled to take public holidays as provided by applicable laws.  The Company shall make available to you a list of public holidays observed by the Company.  </li><br/>
+                    <li><b><u>Sickness:</u></b> In the case of absence from work due to sickness, injury, or other incapacity, you or someone on your behalf should notify us on as soon as possible, but no later than 9:00 AM on the first day of absence. You should tell us the cause of the absence and its likely duration. The Company will comply with any applicable minimum statutory sick leave and/or sick pay regulations and may require you to provide a medical certificate or other form in relation to your sickness.</li><br/>
+                    <li><b><u>Pre-Employment Conditions:</u></b></li><br/>
+                <ol style="text-align: justify;"type="a">
+                    <li><b><u>Work Permit:</u></b> As required by law, your employment with the Company depends upon you providing us legal proof of your identity and authorization to work in India, in addition to any other documents that the Company may reasonably require to ascertain your employability.  This documentation must be provided to us prior to or on your Start Date, or this offer will be rescinded or any employment relationship with you may be terminated, without notice.</li><br/>
+                    <li><b><u>Background Check:</u></b> Your offer is also contingent on successful background checks regarding criminal records, education and employment verification, and in some cases credit history.  A Company representative will contact you regarding the background check procedure.  By signing this Agreement, you hereby authorize such a verification and background check and agree to sign any and all documents necessary to enable the Company to conduct this verification and background check, and you agree that all information provided by you is true and correct to the best of your knowledge, and you expressly release the Company from any claim or cause of action arising out of the Company’s verification of such information.  </li><br/>
+                </ol>
+                    <li><b><u>Employee Proprietary Information and Invention Assignment Agreement:</u></b> Like all Company employees, you must, as a condition of your employment with the Company, sign the Company’s enclosed standard Employee Proprietary Information and Invention Assignment Agreement (see Attachment B), the terms of which are incorporated herein by reference.</li><br/>
+                    <li><b><u>Employment Relationship:</u></b> Your employment with the Company is for no specific period of time and will be subject to the termination procedures described in Section 11 below.  Your job duties, title, compensation and benefits, as well as the Company’s personnel policies and procedures, may change from time to time at the discretion of the Company, subject to applicable law.</li><br/>
+                    <li><b><u>Termination:</u></b> You are required to give a minimum of {{ this.offerletterForm.value.costoffer.noticePeriod}} written prior notice if you choose to resign. After the end of the probationary period as described in Section 3 above, the Company shall be entitled at its absolute discretion to end your employment at any time by giving statutory minimum notice (or pay in lieu of notice). The Company may end your employment without notice (or pay in lieu of notice) if the Company has just cause under applicable law; the Company may also suspend you pending the outcome of a disciplinary investigation.  All benefits will cease upon termination of employment, subject to applicable law.</li><br/>
+                    <li><b><u>Garden Leave:</u></b> If either you or the Company have given notice of termination or resignation, the Company may place you on “garden leave.”  While on garden leave, the Company may: (a) require you to carry out different duties from your normal duties; (b) require you not to attend at work; (c) require you to cease carrying out your duties altogether or cease having any business dealings with the Company’s employees, consultants, suppliers, customers and prospective customers; and/or (d) exclude you from any premises of the Company or any Group Company.  During such period, you will continue to receive your salary and all contractual benefits provided by your employment, and you must continue to comply with Section 13 below.</li><br>
+                    <li><b><u>General Obligations and Outside Activities:</u></b> As an employee, you will be expected to adhere to the Company’s standards of business conduct, including professionalism, loyalty, integrity, honesty, reliability and respect for all.  You will also be expected to comply with the Company’s policies and procedures.  Your execution of this Agreement constitutes your agreement to be bound by all the policies and procedures of the Company as are in force on the date of commencement of your employment, including any amendments or additions thereto from time to time.  You acknowledge that the breach of Company policies and procedures is likely to be regarded as gross misconduct and such breach may result in immediate termination of your employment. While you work for the Company, you will not engage in any other employment, consulting or other business activity without the prior written consent of the Company.  In addition, while you work for the Company, you will not assist any person or entity in competing with the Company, in preparing to compete with the Company, or in hiring any employees or consultants of the Company.</li><br/>
+                    <li><b><u>Data Privacy and Monitoring:</u></b> In the context of your employment it is necessary for the Company to collect, use, and store certain personal information including sensitive personal information about you for administrative, management, compliance, and other lawful purposes.  Such personal data may also be transferred to others in the Company, Group Company, and/or third parties located outside India, including in the United States.  In addition, any use by you of Group Company communications systems and equipment, including email and computers, must be in accordance with any policies that the Company or Group Company may issue from time to time, must be work-related, and may be subject to monitoring and recording.  The collection, use, storage, and transfer of your personal data including sensitive personal data and the monitoring of your use of Group Company communications systems are described in more detail in the Data Privacy Notice included herein as Attachment C.  If there is any part of the Data Privacy Notice that you do not understand, please discuss it with your People and Culture representative before signing. Furthermore, to the extent that you may have access to the personal data of others (within or outside Group Company) in the course of your employment with the Company, you will strictly comply with all applicable data protection laws, regulations and guidelines and any policies issued by the Company or Group Company from time to time relating to data protection and privacy, and you acknowledge that the breach of any such rules may be regarded as gross misconduct.</li><br/>
+                    <li><b><u>Miscellaneous:</u></b></li><br/>
+                <ol  style="text-align: justify;"type="a">
+                    <li><b><u>Group Company:</u></b> The term “Group Company” in this Agreement shall refer to the Company and/or any of its current or future parent companies, subsidiaries, affiliates, successors or assigns. </li><br/>    
+                    <li><b><u>Communications:</u></b> To the extent this Agreement or any related documentation has been provided to you in a language other than English, the English language version will govern in case of any ambiguities or inconsistencies, subject to applicable law. The Company may also deliver any documents related to your employment, and request your consent to such documents, by electronic means.  You hereby consent to receive such documents by electronic delivery and, if applicable, to execute such documents via electronic signatures, click-through acceptance of terms, or other online systems as may be established and maintained by the Company.</li><br/>
+                    <li><b><u>Severability:</u></b> In case any one or more of the provisions contained in this Agreement shall, for any reason, be held to be invalid, illegal or unenforceable in any respect, such invalidity, illegality or unenforceability shall not affect the other provisions of this Agreement, and this Agreement shall be construed as if such invalid, illegal or unenforceable provision had never been contained herein.  If moreover, any one or more of the provisions contained in this Agreement shall for any reason be held to be excessively broad as to duration, geographical scope, activity or subject, it shall be construed by limiting and reducing it, so as to be enforceable to the extent compatible with the applicable law as it shall then appear.</li><br/>
+                    <li><b><u>Governing Law and Forum:</u></b> This Agreement will be governed by the laws of India, and any dispute that cannot be resolved by the parties shall be submitted to the exclusive jurisdiction of the courts of Chennai, Tamil Nadu. </li><br/>
+                    <li><b><u>Entire Agreement:</u></b> This Agreement including the attachments hereto supersede and replace any prior understandings or agreements, whether oral, written or implied, between you and the Company regarding the matters described in this Agreement. </li><br/>
+                </ol>
+                </ol>
+                <p style="text-align: justify;">If you wish to accept this offer, please sign and date both the enclosed duplicate original of this Agreement and the enclosed Employee Proprietary Information and Invention Assignment Agreement and return them to me.  This offer, if not accepted, will expire at the close of business on <b>{{offerAcceptanceDate | date:'longDate'}}.</b></p>
+                <p style="text-align:justify">Very truly yours,</p>
+                <p style="float:left">ViaSat India Private Limited<br/><br/><img [src]="signatures['Sathya']" style="height:40px; width:40%"><br/><br/>Sathya Narayanaswamy<br/>Vice President,India</p>
+                <p style="text-align: justify;">&nbsp;</p>
+                <p style="text-align: justify;">&nbsp;</p>
+                <p style="text-align: justify;">&nbsp;</p>
+                <p style="text-align: justify;">&nbsp;</p>
+                <p style="text-align: justify;">&nbsp;</p>
+                <p style="text-align: justify;">&nbsp;</p>
+                <h4>ACCEPTED AND AGREED:</h4><br/>
+                <p>__________________________<br/>Employee Signature</p>
+                <p>{{this.offerletterForm.value.personal.firstName}}&nbsp;{{this.offerletterForm.value.personal.lastName}}</p><br/>
+                <p>{{ this.offerletterForm.value.costoffer.offerAcceptanceDate|date:'longDate'}}<br/>__________________________<br/>Acceptance Date</p><br/>
+                <p>Start Date: <u>{{ this.offerletterForm.value.costoffer.startDate |date:'longDate'}}</u></p><br/>
+</div>
+
+            <div *ngIf="showAttachmentA==true"> 
+                <app-offerLetterAttachA [offerLetterForm]="this.offerletterForm.value" [salaryBreakDown]="this.salaryBreakDown"></app-offerLetterAttachA>
+            </div>
+
+            <div *ngIf="showAttachmentB==true"> 
+                <app-offerLetterAttachB [offerLetterForm]="this.offerletterForm.value" [signatures]="this.signatures"></app-offerLetterAttachB>
+            </div>
+
+            <div *ngIf="showAttachmentC==true"> 
+                <app-offerLetterAttachC [offerLetterForm]="this.offerletterForm.value"></app-offerLetterAttachC>
+            </div>
+        </div>
+    </div>           
+</div>
+<br>
+<br>
+<br>

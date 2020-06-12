@@ -1,0 +1,111 @@
+.container{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 15px;
+}
+
+.level{
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+
+.round{
+  display: flex;
+  flex-direction: column;
+  width: 67%;
+  margin-left: 20px;
+}
+
+.interviewLevelContainer ,.levelFormContainer{
+  display: flex;
+  flex-direction: column;
+  background: #f9f9f9;
+  width: 90%;
+  border-radius: 5px;
+  padding: 5%;
+}
+
+.interviewLevelHeader{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.levelHeadings{
+  display: flex;
+  flex-direction: column;
+  color: #7e7e7e;
+}
+
+.subHeading1{
+    align-self: flex-start;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 2px;
+}
+
+.subHeading2{
+  color: #0097a7;
+}
+
+.spacer {
+/*    flex: flex-grow flex-shrink flex-basis*/
+    flex: 1 1 auto;
+}
+
+.levelIcons mat-icon{
+  color: #7e7e7e;
+}
+
+mat-icon.mat-icon.material-icons:hover{
+  cursor: pointer;
+}
+
+.levelContent{
+  margin-top: 15px;
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+}
+
+.levelFields{
+  width: 200px;
+}
+
+.noShowDetails{
+  display: flex;
+}
+
+.row{
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 0px;
+}
+
+.submitButton{
+  margin-top: 15px;
+}
+
+.labelValue{
+     display:flex;
+    flex-direction: row;
+}
+
+.label{
+  width: 200px;
+  font-size: 13px;
+  color: #747474;  
+}
+
+.value{
+    width: 200px;
+    font-size: 15px;
+    font-weight: 300;
+}
+

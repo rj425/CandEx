@@ -1,0 +1,126 @@
+<div class="container">
+    <span class="mainHeading">Upload Resumes</span>
+    <br>
+    <div class = "button-container">
+          <div class = "resume-button-flex">
+                <div class="upload-btn-wrapper">
+                        <button mat-raised-button color="primary" class="searchButton" [disabled]="countProgress>=1">
+                         Select Resumes 
+                        </button>
+                        <input multiple type="file" title=" " name="myfile"  
+                         [disabled]="countProgress>=1" 
+                         onclick="this.value = null"
+                         (change)="addResume($event.target.files)" 
+                         accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                         <span>&nbsp;</span>
+                        <button mat-raised-button type="submit" class="submitButton" 
+                         [disabled]="(selection.selected.length>=1)||(countAll==0)||(progressPercentage>=1)"
+                         (click)="onSubmit()" color="primary">Upload All
+                        </button>
+                </div>
+          </div>
+          <div class="filterDiv" [hidden]="!showTable" >
+                <mat-form-field floatPlaceholder="never" class="filter">
+                <input matInput #filter placeholder="Filter by Status" class="filterInput" matTooltip="Type Status to filter">
+                </mat-form-field>
+          </div>
+          <span>&nbsp;</span>
+          <div class ="icon-button">
+                  <div class="list-icon" *ngIf="countProgress==0&&countAll>=1">
+                      <mat-icon matTooltip="Show Statistics" (click)="openDialog()">
+                          view_list
+                      </mat-icon>
+                  </div> 
+                  <span>&nbsp;</span>
+                  <div class="delete-icon" *ngIf="progressPercentage==0&&selection.selected.length>=1">
+                      <mat-icon matTooltip="Remove resume" (click)="removeSelectedRows()">
+                          delete
+                      </mat-icon> 
+                  </div>
+                  <div class="error-icon" *ngIf="countAll>=1">  
+                    <mat-icon class="icon-error" matTooltip="Error Log" (click)="openErrorDialog()">
+                          error
+                    </mat-icon>
+                  </div>
+          </div>
+    </div> 
+    <span>&nbsp;</span>
+    <span>&nbsp;</span>
+    <div *ngIf="showTable==false" class="informationContainer">
+      <span>No Resumes Selected</span>
+    </div>
+    <span>&nbsp;</span>
+    <div  *ngIf="showProgress==true" class="progress">
+       <mat-progress-bar class ="bar" max="100" mode="determinate" [value]="progressPercentage"></mat-progress-bar>
+       <span>{{progressPercentage}}%</span>  
+    </div>
+    <span>&nbsp;</span>
+    <div [hidden]="!showTable">
+        <mat-table  #table [dataSource]="dataSource" *ngIf="dataSource">
+              <ng-container matColumnDef="select">
+                  <mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event? masterToggle():null"[disabled]="showProgress"
+                    [checked]="selection.hasValue() && isAllSelected()" color="primary"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">   
+                    </mat-checkbox>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" [disabled]="showProgress" 
+                      (change)="$event? selection.toggle(row):null"
+                      [checked]="selection.isSelected(row)" color="primary">
+                    </mat-checkbox>
+                  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="serialNo" class="cellContainer" >
+                  <mat-header-cell *matHeaderCellDef>S.No.</mat-header-cell>
+                  <mat-cell *matCellDef="let row">{{row.serialNo}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="fileName" class="cellContainer">
+                  <mat-header-cell  *matHeaderCellDef>File Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row" >{{row.fileName}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="emailID" class="cellContainer">
+                  <mat-header-cell *matHeaderCellDef>Email ID</mat-header-cell>
+                  <mat-cell *matCellDef="let row">{{row.emailID}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="mobileNo" class="cellContainer">
+                  <mat-header-cell *matHeaderCellDef>Mobile Number</mat-header-cell>
+                  <mat-cell *matCellDef="let row">{{row.mobileNo}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="status" class="cellContainer">
+                  <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                  <mat-cell *matCellDef="let row" >
+                  <div *ngIf="row.status=='Uploaded'" 
+                  [ngStyle]="{'color':row.status=='Uploaded'?'green':'blue'}">{{row.status}}</div>
+                  <div *ngIf="row.status=='Failed'" 
+                  [ngStyle]="{'color':row.status=='Failed'?'red':'blue'}">{{row.status}}</div>
+                  <div *ngIf="row.status=='Duplicate'" 
+                  [ngStyle]="{'color':row.status=='Duplicate'?'blue':'blue'}">{{row.status}}
+                  <mat-icon *ngIf=" row.status=='Duplicate'&&progressPercentage==100" matTooltip="Update Resume" 
+                  class="aligntext" 
+                  [ngStyle]="{'color':'black'}"
+                  (click)="goToUpdateResume(row.fileName)"> update
+                  </mat-icon>
+                  </div>
+                  <div *ngIf="row.status=='Updated'" 
+                  [ngStyle]="{'color':row.status=='Updated'?'green':'blue'}">{{row.status}}</div>
+                  <div *ngIf="row.status=='Staged'" 
+                  [ngStyle]="{'color':row.status=='Staged'?'brown':'blue'}">{{row.status}}</div> 
+                  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef=modifiedDate class="cellContainer">
+                  <mat-header-cell *matHeaderCellDef>Modified Date</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                  {{row.modifiedDate | date:'longDate'}}
+                  </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> 
+        </mat-table> 
+        <mat-paginator #paginator
+                       [pageIndex]="0"
+                       [pageSize]="10"
+                       [pageSizeOptions]="[5,10,25,50,100]">
+        </mat-paginator>
+    </div>
+</div>

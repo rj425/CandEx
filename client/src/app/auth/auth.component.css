@@ -1,0 +1,26 @@
+.container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	height: 80%;
+	width: 100%;
+}
+
+mat-card{
+	vertical-align: middle;
+}
+
+form{
+	display: flex;
+	flex-direction: column;
+}
+
+button{
+	width: 150px;
+	align-self: center;
+}
+
+.mat-form-field{
+	width: 150px;
+}

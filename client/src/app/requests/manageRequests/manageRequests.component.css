@@ -1,0 +1,92 @@
+.container{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.progressSpinner{
+    margin-top: 80px;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.filter{
+    float: right;
+    width: 350px;
+}
+
+.mainHeading{
+    align-self: flex-start;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.mat-table .mat-row{
+    min-height: 35px;
+    padding: 0px;
+}
+
+.mat-table .mat-header-row{
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.mat-table .mat-row:nth-child(odd){
+    background-color: rgba(0,0,0,0.05);
+}
+
+.mat-column-requestID{
+    display: flex;
+    justify-content: center;
+}
+
+.mat-column-requestStatus{
+    display: flex;
+    justify-content: center;
+}
+
+.mat-column-position{
+    display: flex;
+    justify-content: center;
+}
+
+.mat-column-experience{
+    display: flex;
+    justify-content: center;
+}
+
+
+.mat-column-designation{
+    display: flex;
+    justify-content: center;
+}
+
+.mat-column-department{
+    display: flex;
+    justify-content: center;
+}
+
+.mat-column-actions{
+    display: flex;
+    color: #747474;
+    justify-content: center;
+}
+
+.actions mat-icon{
+    font-size: 20;
+}
+
+.actions :hover{
+    cursor: pointer;
+}
+
+.filterDiv{
+    margin-top: -20px;
+}

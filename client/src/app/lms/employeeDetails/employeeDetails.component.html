@@ -1,0 +1,143 @@
+<div class="container">
+	<span class="mainHeading">Employee Information</span>
+    <br>
+    <form [formGroup]="employeeForm" *ngIf="showForm">
+        <div class="row">
+            <div class="sub-header">Personal Details</div>
+        </div>
+        <br>
+        <div class="section">
+            <div class="row2">
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="First Name" 
+                            type="text" 
+                            id="firstName" 
+                            class="validate"
+                            formControlName="firstName">
+                </mat-form-field>
+
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="Middle Name" 
+                            type="text" 
+                            id="middleName" 
+                            class="validate"
+                            formControlName="middleName">
+                </mat-form-field>
+
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="Last Name" 
+                            type="text" 
+                            id="lastName" 
+                            class="validate"
+                            formControlName="lastName">
+                </mat-form-field>
+
+                <mat-form-field class="formFields">
+                    <mat-select placeholder="Gender" formControlName="gender">
+                        <mat-option value='' disabled="true">Select Gender</mat-option>
+                        <mat-option value="Male">Male</mat-option>
+                        <mat-option value="Female">Female</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row2">
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="Current Address" 
+                            type="text" 
+                            id="currentAddress" 
+                            class="validate"
+                            formControlName="currentAddress">
+                </mat-form-field>
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="Permanent Address"
+                            type="text" 
+                            id="permanentAddress" 
+                            class="validate"
+                            formControlName="permanentAddress">
+                </mat-form-field>
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="Email"
+                            type="email" 
+                            id="email" 
+                            class="validate"
+                            formControlName="email">
+                </mat-form-field>
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="Contact Number"
+                            type="text" 
+                            id="mobile" 
+                            class="validate"
+                            formControlName="mobile">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sub-header">ViaSat Employee Details</div>
+        </div>
+        <br>
+        <div class="section">
+            <div class="row2">
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="Employee ID"
+                            type="text" 
+                            id="employeeID" 
+                            class="validate"
+                            formControlName="employeeID">
+                </mat-form-field>
+            </div>
+            <div class="row2">
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="User ID"
+                            type="text" 
+                            id="userID" 
+                            class="validate"
+                            formControlName="userID">
+                </mat-form-field>
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="Joining"
+                            type="text" 
+                            id="joiningDate" 
+                            class="validate"
+                            formControlName="joiningDate">
+                </mat-form-field>
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="Manager ID"
+                            type="text" 
+                            id="managerID" 
+                            class="validate"
+                            formControlName="managerID">
+                </mat-form-field>
+                <mat-form-field class="formFields">
+                    <input  matInput
+                            placeholder="Designation"
+                            type="text" 
+                            id="designation" 
+                            class="validate"
+                            formControlName="designation">
+                </mat-form-field>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <button mat-raised-button
+                        type="submit" 
+                        color="primary" 
+                        [disabled]="!employeeForm.valid"
+                        (click)="onSubmit()"
+                        >
+                        Add as Employee
+            </button>
+        </div>
+    </form>
+</div>

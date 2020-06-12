@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{roundName}} Decision</h2>
+<mat-radio-group [(ngModel)]="selectedDecision">
+  <mat-radio-button value="Recommend"
+  					[disabled]="disableForm">
+  	Recommend
+  </mat-radio-button>
+  <mat-radio-button value="Not Recommended"
+  					[disabled]="disableForm">
+  	Not Recommended
+  </mat-radio-button>
+</mat-radio-group>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close="null">Cancel</button>
+  <button mat-button [mat-dialog-close]="selectedDecision" 
+  		  [disabled]="(selectedDecision!='Recommend' && selectedDecision!='Not Recommended') || disableForm">Submit</button>
+</mat-dialog-actions>

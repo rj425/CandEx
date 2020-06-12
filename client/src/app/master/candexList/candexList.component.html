@@ -1,0 +1,39 @@
+<div>
+  <div class="headerRow">
+    <span class="spacer"></span>
+    <button mat-raised-button color="primary"
+        class="addRecordButton" 
+        (click)="createForm('post',value)">
+        Add Record
+    </button>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <mat-form-field floatPlaceholder="never" class="filter">
+      <input matInput #filter placeholder="Filter Records" class="filterInput"
+            matTooltip="Type 'Empty' to filter records with empty fields">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-table #table [dataSource]="dataSource" *ngIf="dataSource">
+      <div *ngFor="let key of displayedColumns"> 
+        <ng-container [matColumnDef]="key">
+          <mat-header-cell *matHeaderCellDef>{{key|keys}}</mat-header-cell>
+          <mat-cell *matCellDef="let masterList" class="candidateID-col">
+            <span  *ngIf="key=='createdDate' || key=='modifiedDate'">{{masterList[key] | date: 'dd/MM/yyyy'}}</span>
+            <span *ngIf="key!='actions' && key!='createdDate' && key!='modifiedDate'">{{masterList[key]|values}}</span>
+            <span>
+              <mat-icon matTooltip="Edit Record"
+                     *ngIf="key=='actions'"
+                    (click)="createForm('put',masterList)">
+              edit
+              </mat-icon>
+            </span>
+          </mat-cell>
+        </ng-container>
+      </div>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let masterList; columns: displayedColumns;"></mat-row>
+    </mat-table> 
+  </div>
+  <br>
+  <br>
+</div>

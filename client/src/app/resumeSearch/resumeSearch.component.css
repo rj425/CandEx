@@ -1,0 +1,145 @@
+.container{
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    text-align: center;
+}
+
+.mainHeading{
+    align-self: flex-start;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.searchResume {
+    display: flex;
+    flex-direction:row;
+    height: 10px;
+    width: 100%;
+}
+
+.button-flex{
+    flex:3;
+    width:100%;
+}
+
+.matform{
+    width: 100%; 
+}
+
+.mat-table .mat-header-row{
+    padding:0px;
+    display:flex;
+    justify-content:center;
+}
+
+.downloadIcon{
+    text-decoration: none;
+    color: #0097a7;
+    line-height: 36px;
+}
+
+.mat-table .mat-row:nth-child(odd){
+    background-color: rgba(0,0,0,0.05);
+}
+
+.informationContainer{
+    margin-top: 20px;
+    padding: 40px;
+    display: flex;
+    justify-content: center;  
+    color: #909090;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
+}
+
+.mat-table .mat-row{
+    min-height: 35px;
+    padding: 0px;
+}
+
+.informationContainer span{
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-column-select{
+    overflow: visible;
+}
+
+.searchBar{
+    width: 80%;
+}
+
+.mat-column-resumeID{
+    flex: 0 0 75px;
+}
+
+.mat-column-emailID{
+
+    word-break: break-all;
+    flex:0 0 200px;
+}
+
+.iconClass{
+    flex:2;
+    width:15px;    
+}
+
+.icon-help-positioner{
+    float:right;
+    width: 40px;
+    line-height: 36px;
+}
+
+.icon-download-positioner{
+    float: right;
+    width: 40px;
+    line-height: 36px;
+}
+
+.submitButton{
+    width: 40px;
+    float: right; 
+}
+.indexButton{
+    width: 45px;
+    float: right;
+    margin-left: 0;
+    margin-right: 11px;
+
+
+}
+
+.Download{
+    text-decoration: none;
+    color: #0097a7;   
+    
+}
+
+.sideHeader{
+    color: #7f7f7f;
+    vertical-align: middle;
+    margin-top: 5px;
+    font-size: 14px;
+    margin-right: 20px;
+}
+
+.headerDiv{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+.spacer{
+    flex: 1 1 auto;
+}

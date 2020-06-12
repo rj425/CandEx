@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="informationContainer" *ngIf="noNotesAvailable">
+		<br>
+		<span class="heading1">No Notes Found from Other panellists!</span>
+		<br><br>
+	</div>
+	<div>
+		<div *ngFor="let level of levelData">
+			<div *ngFor="let round of level.interviewRounds">
+				<div *ngFor="let panellist of round.panel">
+					 <div *ngIf="panellist.notes!==''">
+					 	<div class="section">
+							 <div class="panellistDetailsSection">	
+								 <span class="timestamp">{{level.levelOfInterview}} ,ROUND {{round.roundNumber}}</span>
+								 <br><br>
+								 <span class="panellist">{{panellist.panellistName}}</span><br><br>
+								 <span class="timestamp"><label>Date : </label>{{round.interviewDate}}</span><br>
+								 <span class="timestamp">
+								 	<label>Time : </label>{{round.interviewStartTime}}-{{round.interviewFinishTime}}
+								 </span>
+							 </div>
+							 <div class="panellistNotesSection" [innerHTML]="panellist.notes"></div>
+						</div>
+						<div>&nbsp;</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

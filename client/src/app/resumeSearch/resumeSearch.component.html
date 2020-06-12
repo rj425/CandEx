@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="headerDiv">
+    <span class="mainHeading">Search Resumes</span>
+    <span class="spacer"></span>
+    <span class="sideHeader">Total Resumes : {{resumeCount}}</span>
+  </div>
+      <div class="searchResume">
+            <div class="button-flex">
+                  <mat-form-field class="matform">
+                    <input type="Search" placeholder="Search"  matInput [formControl]="myControl" [matAutocomplete]="auto" 
+                      [(ngModel)]="searchQuery" (keyup.enter)="onSubmit()" (ngModelChange)="onSearchQueryChange()" required>
+                  </mat-form-field>
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let keyword of filteredKeywords|async" [value]="keyword">
+                       {{keyword}} 
+                    </mat-option>
+                  </mat-autocomplete>
+            </div>
+            <div class="iconClass">  
+                  <mat-icon class="icon-help-positioner" matTooltip="Help" (click)="openDialog()">help</mat-icon>
+                  <div *ngIf="showIcon==true" class="icon-download-positioner">
+                      <mat-icon >
+                        <a href="{{this.downloadURL}}" download target="_blank" matTooltip="Download Resume" class="material-icons downloadIcon"  (click)="onClickDownload()">file_download</a>
+                      </mat-icon>
+                  </div>
+                  <button mat-raised-button type="submit" class="submitButton" title="Zip Selected Resumes" 
+                  [disabled]="showButton||selection.selected.length==0" 
+                  (click)="onClickZipAll()" color="primary">Zip All
+                  </button>
+                  <span class="spacer"></span>
+                  <button mat-raised-button type="submit" class="indexButton" title="Index All Resumes" 
+                  [disabled]="disableIndex" 
+                  (click)="indexResumes()" color="primary">Index
+                  </button>
+            </div>
+      </div>
+      <br> 
+      <span>&nbsp;</span>
+      <div *ngIf="showTable==false" class="informationContainer">
+        <span>{{displayQuery}}</span>
+      </div> 
+      <span>&nbsp;</span>
+      <span>&nbsp;</span>
+      <div class="mattable" [hidden]="!showTable"> 
+            <mat-table  #table [dataSource]="dataSource" *ngIf="dataSource">
+                <ng-container matColumnDef="select">
+                    <mat-header-cell *matHeaderCellDef>
+                      <mat-checkbox (change)="$event? masterToggle():null"
+                      [checked]="selection.hasValue() && isAllSelected()" color="primary"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">   
+                      </mat-checkbox>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="selection.toggle(row);showButton=false"
+                      [checked]="selection.isSelected(row)" color="primary">
+                      </mat-checkbox>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="resumeID">
+                    <mat-header-cell *matHeaderCellDef> Resume ID </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.resumeID}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="emailID">
+                    <mat-header-cell *matHeaderCellDef> Email ID </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.emailID}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="mobileNo">
+                    <mat-header-cell *matHeaderCellDef> Mobile Number </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.mobileNo==0?'-':row.mobileNo}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="resumeURL">
+                    <mat-header-cell *matHeaderCellDef> Resume  </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <a href="{{row.resumeURL}}" download target="_blank" matTooltip="Download Resume" class="material-icons downloadIcon">file_download</a>                     
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="wt">
+                    <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.weight}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="createdDate">
+                    <mat-header-cell *matHeaderCellDef> Created Date</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.createdYear * 1000 | date}} </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> 
+              </mat-table>
+              <mat-paginator #paginator
+                            [length]="countAll"
+                            [pageIndex]="0"
+                            [pageSize]="10"
+                            [pageSizeOptions]="[5,10,25,50,100]">
+              </mat-paginator>
+      </div> 
+</div>

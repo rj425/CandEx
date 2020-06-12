@@ -1,0 +1,125 @@
+<div class="container">
+    <span class="mainHeading">User's Directory</span>
+<!--     <div class="filterDiv">
+      <mat-form-field floatPlaceholder="never" class="filter">
+        <input matInput #filter placeholder="Filter Users" class="filterInput"
+              matTooltip="Type 'Empty' to filter users with empty fields">
+      </mat-form-field>
+    </div>
+ -->   
+      <br>   
+      <div class="progressSpinner" *ngIf="!userList">
+      <mat-progress-spinner
+          color="primary"
+          mode="indeterminate">
+      </mat-progress-spinner>       
+    </div>    
+    <mat-table #table [dataSource]="dataSource" *ngIf="userList">
+      <ng-container matColumnDef="username" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>Username</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.username}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="first_name" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.first_name}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="last_name" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.last_name}}</mat-cell>
+      </ng-container>
+        <ng-container matColumnDef="email" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>Email Address</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="is_active" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <mat-icon *ngIf="row.is_active" class="tick">check_circle</mat-icon>
+            <mat-icon *ngIf="!row.is_active" class="cross">cancel</mat-icon>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="is_staff" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>Staff</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <mat-icon *ngIf="row.is_staff" class="tick">check_circle</mat-icon>
+            <mat-icon *ngIf="!row.is_staff" class="cross">cancel</mat-icon>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="is_superuser" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>Superuser</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <mat-icon *ngIf="row.is_superuser" class="tick">check_circle</mat-icon>
+            <mat-icon *ngIf="!row.is_superuser" class="cross">cancel</mat-icon>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="groups" class="cellContainer">
+        <mat-header-cell *matHeaderCellDef>Groups</mat-header-cell>
+        <mat-cell *matCellDef="let row"><mat-icon (click)="showGroups(row)">info</mat-icon></mat-cell>
+      </ng-container>
+
+      
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table> 
+    <br><br>  
+</div>
+    <!-- <div class="row">
+        <table class="striped centered ">
+            <thead>
+                <tr>
+                    <th >Username</th>
+                    <th >Name</th>
+                    <th >Email Address</th>
+                    <th >Active</th>
+                    <th >Staff</th>
+                    <th >Superuser</th>
+                    <th >Groups</th>
+                    <th >Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let user of userList">
+                
+                    <td onload="getGroup(user)">{{user.username}}</td>
+                    <td>{{user.first_name}} {{user.last_name}}</td>
+                    <td>{{user.email}}</td>
+                    <td *ngIf=" user.is_active"><i class="material-icons tick">check_circle</i></td>
+                    <td *ngIf=" !user.is_active"><i class="material-icons cross">cancel</i></td>
+                    <td *ngIf=" user.is_staff"><i class="material-icons tick">check_circle</i></td>
+                    <td *ngIf=" !user.is_staff"><i class="material-icons cross">cancel</i></td>
+                    <td *ngIf=" user.is_superuser"><i class="material-icons tick">check_circle</i></td>
+                    <td *ngIf=" !user.is_superuser"><i class="material-icons cross">cancel</i></td>
+                    <td ><i class="material-icons" (click)="showGroups(user)">info</i></td>
+                    <td><i class="material-icons" (click)="editUser(user)">mode_edit</i></td>
+                </tr>
+            </tbody>
+        </table>   
+    </div>
+    
+    <modal [visible]="showDialog"
+           (changeVisibility)="showDialog=$event"
+           height="70"
+           width="50">
+        <div class="container" [hidden]="!showGroup">
+            <div><h2>User Groups</h2></div><br><br>
+            <table *ngIf="groupExists">
+            <tr *ngFor="let grp of userGroup">
+                <td>{{grp}}</td>
+                <td><span (click)="showPermissions(grp)">View Permissions</span></td>
+            </tr>
+            </table>
+            <div *ngIf="!groupExists"><h2>No groups assigned to this user!</h2></div>
+        </div>
+        <div class="container" [hidden]="!showPermission">
+            <div><h2>List of permissions</h2></div><br><br>
+            <div class="container scroll">
+                <ul *ngFor="let permission of permissionList">
+                    <li>{{permission}}</li>
+                </ul>
+            </div>
+            <div class="back" (click)=goBack()>Go Back</div>
+        </div>
+
+    </modal> -->
+

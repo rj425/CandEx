@@ -1,0 +1,161 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    align-self: center;
+}
+
+/deep/.routerOutletContainer{
+	width: 100% !important;
+}
+
+.container mat-tab-group{
+	width: 100%;
+}
+
+/deep/.mat-tab-label{
+	 min-width: 0 !important;
+	 padding: 3px !important;
+	 margin: 3px !important;
+	 width: 100% !important;
+	 font-size: 18px !important;
+}
+
+.informationContainer{
+  margin-top: 20px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  color: #909090;
+}
+
+.informationContainer span{
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.informationContainer .heading1{
+	font-size: 20px;
+	color: #747474;
+}
+
+.greetingHeading{
+	display: flex;
+	flex-direction: row;
+}
+
+.greetingIcon{
+	align-self: center;
+	font-size: 25px;
+	color: #0097a7;	
+}
+
+.row{
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.label{
+	width: 150px;
+  color: #747474;
+}
+
+.labelValueSpacer{
+	flex: 1 1 auto;
+}
+
+.columnSpacer{
+	flex: 2 1 auto;
+}
+
+.value{
+	width: 200px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.feedbackHeadings{
+  display: flex;
+  flex-direction: column;
+  color: #7e7e7e;
+}
+
+.subHeading1{
+    align-self: flex-start;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 2px;
+    color: #747474;
+}
+
+/deep/.mat-tab-body{
+    padding: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+hr{
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    margin-bottom: 15px;
+}
+
+.spacer{
+  flex: 1 1 auto;
+}
+
+.notesFormFields{
+  width: 150px;
+}
+
+.textlink{
+  align-self: center;
+  margin-left: 15px;
+  font-size: 12px;
+}
+
+.textlink:hover{
+  cursor: pointer;
+  color: #0097a7;
+}
+
+.editorRow{
+  justify-content: center;
+}
+
+
+.commentsSection{
+  width: 800px;
+  min-height: 250px;
+  border-color: #d4d4d4;
+  border-style: solid;
+  border-width: 1px;
+  color: #747474;
+  padding: 10px;
+}
+
+embed{
+  overflow-y: scroll;
+  width: 100%;
+  height:690px;
+}
+
+.downloadButton{
+  text-decoration: none;
+  font-size: 30px;
+  color: #747474;
+}
+
+.downloadButton:hover{
+  color: #505050;
+}

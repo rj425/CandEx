@@ -1,0 +1,93 @@
+.container{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.progressSpinner{
+    margin-top: 80px;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.filter{
+    float: right;
+    width: 350px;
+}
+
+.mainHeading{
+    align-self: flex-start;
+    font-size: 20px;
+    font-weight: 300;
+}
+.mat-header-row, .mat-row {
+    padding: 0px!important;
+}
+.mat-table .mat-row{
+    min-height: 35px;
+    padding: 0px;
+}
+
+.mat-table .mat-row:nth-child(odd){
+    background-color: rgba(0,0,0,0.05);
+}
+
+mat-header-cell{
+    display:flex;
+    justify-content: center;
+}
+
+mat-cell{
+    display:flex;
+    justify-content: center;
+}
+
+mat-icon{
+    color:#747474;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20;
+}
+div.dialog {
+    width: 900px;
+    min-height: 50px;
+    height: 550px;
+}
+
+.mat-table .mat-row .mat-cell{
+  text-align: center;
+}
+
+.mat-table .mat-header-row .mat-header-cell{
+  text-align: center;
+}
+
+li {
+    text-align: left;
+}
+
+
+.back {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    float: right;
+}
+
+.tick {
+    color: mediumseagreen;
+}
+
+.cross {
+    color: crimson;
+}
+
+.filterDiv{
+    margin-top: -20px;
+}

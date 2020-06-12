@@ -1,0 +1,108 @@
+<div class="container">
+<span class="mainHeading">{{title}}</span>
+<br>
+	<form class="col s8" novalidate [formGroup]="userForm" (ngSubmit)="onSubmit()">
+	
+		<div class="row">
+			<mat-form-field class="formFields">
+	    		<input  matInput placeholder="Username"
+	    						type="text" 
+			                    id="username" 
+			                    class="validate"
+			                    formControlName="username">
+		    </mat-form-field>
+			<span class="spacer"></span>       
+
+            <mat-form-field class="formFields" *ngIf="!id">
+	            <input matInput placeholder="Password"
+								type="password" 
+								id="password" 
+								class="validate" 
+								formControlName="password">
+			</mat-form-field>
+			<span *ngIf="!id"><mat-icon (click)="generatePassword()">lock</mat-icon></span>
+			<div class="formFields"></div>
+			<div class="formFields"></div>
+
+		</div>
+
+		<div  *ngIf="!id">
+
+			<div class="row">
+			<mat-form-field class="formFields">
+				<input matInput placeholder="First Name" 
+								type="text" 
+								id="firstName" 
+								class="validate" 
+								formControlName="first_name">
+			</mat-form-field>
+
+			<span class="spacer"></span>
+
+			<mat-form-field class="formFields">
+				<input matInput placeholder="Last Name" type="text" 
+							id="lastName" 
+							class="validate" 
+							formControlName="last_name">
+			</mat-form-field>
+
+			<span class="spacer"></span>
+
+			<mat-form-field class="formFields">
+				<input matInput placeholder="Email Address" 
+								type="email" 
+								id="emailAddress" 
+								class="validate" 
+								formControlName="email">
+			</mat-form-field>
+			<div class="formFields"></div>
+			</div>
+		</div>
+		<!-- 
+		---------------------------------------------------- -->
+
+        <br><br>
+        <div class="grid">
+        	<mat-checkbox [checked]="true" 
+        					id="is_active" 
+        					formControlName="is_active" 
+        					color="primary"
+        					mat-tooltip="Designates whether this user should be treated as active i.e can log in to CandEx.Unselect this instead of deleting accounts.">
+        		Active
+        	</mat-checkbox>
+        	<span class="spacer"></span>
+        	<mat-checkbox id="is_staff" 
+        					formControlName="is_staff"  
+        					color="primary"
+        					mat-tooltip="Designates whether the user can log into this admin site.">
+        		Staff Status
+        	</mat-checkbox>
+        	<span class="spacer"></span>
+        	<mat-checkbox id="is_superuser" 
+        					formControlName="is_superuser" 
+        					color="primary"
+        					mat-tooltip="Designates that this user has all permissions without explicitly assigning them.">
+        		Superuser Status
+        	</mat-checkbox>
+        	<div class="formFields"></div>
+			<div class="formFields"></div>
+			<div class="formFields"></div>
+			
+        </div>
+        
+        <br>
+        <div class="row">
+        	<mat-form-field class="formFields">
+		    	<mat-select placeholder="Select group for user" multiple="true" formControlName="groups" >
+                <mat-option value=null disabled="true">Select group for user</mat-option>
+                <mat-option [value]="group.name" *ngFor=" let group of groups">{{group.name}}</mat-option>
+	            </mat-select>   
+	        </mat-form-field>
+        </div>
+		<br><br>
+        <button mat-raised-button type="submit" class="submitButton" 
+                color="primary" [disabled]="!this.userForm.valid">Save
+        </button>
+		
+	</form>
+</div>

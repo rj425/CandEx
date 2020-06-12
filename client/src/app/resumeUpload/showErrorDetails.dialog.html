@@ -1,0 +1,18 @@
+<div *ngIf="this.failed>=1">
+<h1 mat-dialog-title style="font-size:18px;">Error Log</h1>
+<div class="errorLogs">
+	<table >
+		<tr>
+		    <th>Filename</th>
+		    <th>Error Status</th>
+	  	</tr>
+	  	<tr *ngFor="let error of errorResponse">
+		    <td>{{ error.fileName }}</td>
+		    <td>{{ error.error}}</td>
+	  	</tr>
+	</table>
+</div>
+</div>
+<div class="informationContainer" *ngIf="this.failed==0">
+ <p>No Errors Found</p>
+</div>

@@ -1,0 +1,27 @@
+<cardContainer 
+    cardTitle="Weekly Interview Hours"
+    width="100%"
+    height="250px"
+    (refreshEvent)="refreshComponent($event)">
+    <div card-content>
+        <div *ngIf="keyLength==1" class="informationMessage">
+            <span>No Interviews this week!</span>
+        </div>
+        <table class="table" *ngIf="keyLength>1">
+            <thead>
+                <tr>
+                    <th>Panellist Name</th>
+                    <th *ngFor="let level of levels">{{level}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let panellistName of jsonResponse | key">
+                    <td>{{panellistName}}</td>
+                    <td *ngFor="let level of levels">
+                        {{jsonResponse[panellistName][level]? jsonResponse[panellistName][level]:0}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</cardContainer>

@@ -1,0 +1,42 @@
+.container{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+    font-family: 'Roboto-Regular','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    padding: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.mainHeading{
+    align-self: flex-start;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.formFields{
+    width:80%;
+}
+.description{
+    font-size:13px;
+}
+
+.row{
+    display:flex;
+    flex-direction: row;
+}
+
+.spacer {
+/*    flex: flex-grow flex-shrink flex-basis*/
+    flex: 1 1 auto;
+}
+

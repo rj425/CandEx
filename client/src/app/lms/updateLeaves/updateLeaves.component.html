@@ -1,0 +1,67 @@
+<br><br>
+<div class="container">
+	<div class="row">
+		<div class="col s12 l12"><h2>Update Leave Form</h2></div>
+    </div>
+    <form [formGroup]="leaveForm" >
+
+	    <div class="row">
+	        <div class="col s12 l3">
+	            <label for="casualLeaves">Casual Leaves</label>
+	            <input  type="number" 
+	                    id="casualLeaves" 
+	                    class="validate"
+	                    formControlName="casualLeaves">
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div class="col s12 l3">
+	            <label for="sickLeaves">Sick Leaves</label>
+	            <input  type="number" 
+	                    id="sickLeaves" 
+	                    class="validate"
+	                    formControlName="sickLeaves">
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div class="col s12 l3">
+	            <label for="annualLeaves">Annual Leaves</label>
+	            <input  type="number" 
+	                    id="annualLeaves" 
+	                    class="validate"
+	                    formControlName="annualLeaves">
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div class="col s12 l3">
+	            <label for="flexiLeaves">Flexi Leaves</label>
+	            <input  type="number" 
+	                    id="flexiLeaves" 
+	                    class="validate"
+	                    formControlName="flexiLeaves">
+	        </div>
+	    </div>	    
+	    <div class="row">
+	        <div class="col s12 l3">
+	            <label for="maternityLeaves">Maternity Leave</label>
+	            <input  type="number" 
+	                    id="maternityLeaves" 
+	                    class="validate"
+	                    formControlName="maternityLeaves">
+	        </div>
+	    </div>
+	    <div class="row">
+	    <div class="col s12 l3"> 
+            <button type="submit" 
+                    class="btn cyan darken-2 right" 
+                    type="submit" 
+                    [disabled]="!leaveForm.valid"
+                    (click)="onSubmit()"
+                    >
+                    Save
+                    
+            </button>
+        </div>   
+        </div>
+	    </form>
+</div>

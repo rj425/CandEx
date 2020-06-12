@@ -1,0 +1,344 @@
+<div class="navbar">
+    <span class="userInfo" color="primary">
+        <span class="userIconContainer">
+            <mat-icon class="user">account_circle</mat-icon>
+        </span>
+        <span>&nbsp;</span>
+        <span class="userFirstName" *ngIf="user">{{user.first_name}}</span>
+    </span>
+    <br>
+    <div class="navLinks">
+        <a mat-button class="links"  
+            (click)="goToBlockNavigate()"
+            [routerLink]="percentage==false?['/dashboard']:[]" 
+            [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+            [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+            <span>&nbsp;</span>
+            <mat-icon>dashboard</mat-icon>
+            <span>&nbsp;</span>
+            <span>Dashboard</span>
+        </a>
+        <md2-accordion multiple="false">
+        <md2-accordion-tab>
+            <md2-accordion-header>
+                    <a mat-button class="links">
+                            <span>&nbsp;</span>
+                            <mat-icon>format_align_justify</mat-icon>
+                            <span>&nbsp;</span>
+                            <span>Interview Process</span>
+                    </a>    
+            </md2-accordion-header>
+            <div class="scrollbar-y">
+            <div class="scrollbar-x">
+                <a mat-button class="links"
+                    (click)="goToBlockNavigate()"
+                    [routerLink]="percentage==false?['/requests']:[]" 
+                    [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                    [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                    <span>&nbsp;</span>
+                    <mat-icon>add_circle</mat-icon>
+                    <span>&nbsp;</span>
+                    <span>Add Request</span>
+                </a>
+                <a mat-button class="links" 
+                    (click)="goToBlockNavigate()"
+                    [routerLink]="percentage==false?['/manageRequests']:[]" 
+                    [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                    [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                    <span>&nbsp;</span>
+                    <mat-icon>view_list</mat-icon>
+                    <span>&nbsp;</span>
+                    <span>Manage Requests</span>
+                </a>
+                <a mat-button class="links"  
+                        (click)="goToBlockNavigate()"          
+                        [routerLink]="percentage==false?['/candidates']:[]" 
+                        [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                        [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                        <span>&nbsp;</span>
+                        <mat-icon>add_circle</mat-icon>
+                        <span>&nbsp;</span>
+                        <span>Add Candidate</span>
+                </a>
+                <a mat-button class="links"
+                        (click)="goToBlockNavigate()"
+                        [routerLink]="percentage==false?['/manageCandidates']:[]" 
+                        [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                        [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                        <span>&nbsp;</span>
+                        <mat-icon>view_list</mat-icon>
+                        <span>&nbsp;</span>
+                        <span>Manage Candidates</span>
+                </a>
+                <a mat-button class="links"
+                        (click)="goToBlockNavigate()"
+                        [routerLink]="percentage==false?['/emailTemplates']:[]" 
+                        [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                        [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                        <span>&nbsp;</span>
+                        <mat-icon>add_circle</mat-icon>
+                        <span>&nbsp;</span>
+                        <span>Add Email Template</span>
+                </a>
+                <a mat-button class="links"
+                        (click)="goToBlockNavigate()"
+                        [routerLink]="percentage==false?['/listEmails']:[]" 
+                        [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                        [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                        <span>&nbsp;</span>
+                        <mat-icon>view_list</mat-icon>
+                        <span>&nbsp;</span>
+                        <span>Manage Email Templates</span>
+                </a>
+                <a mat-button class="links"
+                        (click)="goToBlockNavigate()"
+                        [routerLink]="percentage==false?['/user']:[]" 
+                        [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                        [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                        <span>&nbsp;</span>
+                        <mat-icon>add_circle</mat-icon>
+                        <span>&nbsp;</span>
+                        <span>Add User</span>
+                </a>
+                <a mat-button class="links"
+                        (click)="goToBlockNavigate()"
+                        [routerLink]="percentage==false?['/listUsers']:[]" 
+                        [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                        [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                        <span>&nbsp;</span>
+                        <mat-icon>view_list</mat-icon>
+                        <span>&nbsp;</span>
+                        <span>Manage Users</span>
+                </a>
+                <a mat-button class="links" 
+                        (click)="goToBlockNavigate()"
+                        [routerLink]="percentage==false?['/master']:{}" 
+                        [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                        [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                        <span>&nbsp;</span>
+                        <mat-icon>view_carousel</mat-icon>
+                        <span>&nbsp;</span>
+                        <span>Masters</span>
+                </a>
+            </div>
+            </div>
+        </md2-accordion-tab>
+                <a mat-button class="links" 
+                        (click)="goToBlockNavigate()"
+                        [routerLink]="percentage==false?['/candidateOfferLetter']:[]" 
+                        [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                        [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                        <span>&nbsp;</span>
+                        <mat-icon>description</mat-icon>
+                        <span>&nbsp;</span>
+                        <span>Offer Letter</span>
+                </a>
+                <a mat-button class="links" 
+                        (click)="goToBlockNavigate()"
+                        [routerLink]="percentage==false?['/resumeUpload']:[]" 
+                        [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                        [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                        <span>&nbsp;</span>
+                        <mat-icon>file_upload</mat-icon>
+                        <span>&nbsp;</span>
+                        <span>Upload Resumes</span>
+                </a> 
+                <a mat-button class="links"
+                        (click)="goToBlockNavigate()" 
+                        [routerLink]="percentage==false?['/resumeSearch']:[]" 
+                        [routerLinkActive]="percentage==false?['router-link-active']:[]" 
+                        [routerLinkActiveOptions]="percentage==false?{exact:true}:{}">
+                        <span>&nbsp;</span>
+                        <mat-icon>search</mat-icon>
+                        <span>&nbsp;</span>
+                        <span>Search Resumes</span>
+                </a>       
+        </md2-accordion>   
+    </div>
+</div>
+
+
+<!-- <aside id="left-sidebar-nav">
+    <ul id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y" style="width: 240px;">
+        <li class="user-details cyan darken-2">
+            <div class="row">
+                <div class="col col s4 m4 l4">
+                    <img src="assets/avatar.png" alt="" class="circle responsive-img valign profile-image">
+                </div>
+                <div class="col col s8 m8 l8">
+
+                    <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" data-activates="profile-dropdown" *ngIf="user">
+                       {{user.first_name}} {{user.last_name}}
+                      <i class="mdi-navigation-arrow-drop-down right"></i>
+                    </a>
+                    <ul id="profile-dropdown" class="dropdown-content">
+                        <li><a (click)="editProfile()"><i class="mdi-action-face-unlock"></i> Profile</a>
+                        </li>
+                        <li><a (click)="changePassword()"><i class="mdi-action-settings"></i> Settings</a>
+                        </li>
+                        <li><a><i class="mdi-communication-live-help"></i> Help</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a><i class="mdi-action-lock-outline"></i> Lock</a>
+                        </li>
+                        <li><a (click)="logout()"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+
+        <li [routerLinkActive]="['router-link-active']">
+            <a [routerLink]="['/dashboard']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"><i class="mdi-action-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+                <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-social-group-add"></i> Requests</a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li [routerLinkActive]="['router-link-active']">
+                                <a [routerLink]="['/manageRequests']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Manage</a></li>
+                            <li [routerLinkActive]="['router-link-active']">
+                                <a [routerLink]="['/requests']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Raise Request</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+                <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment-ind"></i> Candidates</a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li [routerLinkActive]="['router-link-active']"><a [routerLink]="['/manageCandidates']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Manage</a></li>
+                            <li [routerLinkActive]="['router-link-active']"><a [routerLink]="['/candidates']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Add Candidate</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+                <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-communication-email"></i> Emails Templates</a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li [routerLinkActive]="['router-link-active']"><a [routerLink]="['/listEmails']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Manage</a></li>
+                            <li [routerLinkActive]="['router-link-active']"><a [routerLink]="['/emailTemplates']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Create New</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+
+
+        <li [routerLinkActive]="['router-link-active']"><a [routerLink]="['/master']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"><i class="mdi-action-view-carousel"></i> Masters</a></li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+                <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-social-group"></i> Users</a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li [routerLinkActive]="['router-link-active']"><a [routerLink]="['/listUsers']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Manage</a></li>
+                            <li [routerLinkActive]="['router-link-active']"><a [routerLink]="['/user']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Create User</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+
+
+
+        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;">
+            <div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps-scrollbar-y-rail" style="top: 0px; height: 679px; right: 3px;">
+            <div class="ps-scrollbar-y" style="top: 0px; height: 351px;"></div>
+        </div>
+    </ul>
+    <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
+</aside>
+
+<modal [visible]="showChangePassword" (changeVisibility)="showChangePassword=$event" height=70 width=40>
+    <div class="containerUserProfile">
+        <div class="row">
+            <h4 class="heading1">Confirm Credentials</h4>
+        </div>
+        <form novalidate *ngIf="userForm" [formGroup]="userForm">
+            <div class="row">
+                <div class="col l7">
+                    <label for="username" class="labelUserProfile">Username</label>
+                    <input type="text" id="username" class="validate" formControlName="username">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col l7">
+                    <label for="password" class="labelUserProfile">Current Password</label>
+                    <input type="password" id="password" class="validate" formControlName="password">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col l7">
+                    <label for="newpassword" class="labelUserProfile">New Password</label>
+                    <input type="password" id="newpassword" class="validate" formControlName="newPassword">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col l7">
+                    <label for="confirmpassword" class="labelUserProfile">Confirm Password</label>
+                    <input type="password" id="confirmpassword" class="validate" [(ngModel)]="confirmPassword" [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <button class="btn waves-effect waves-light cyan darken-2 left" type="submit" name="action" (click)="onSubmitEditPassword()">Verify
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</modal>
+
+
+<modal [visible]="showEditProfile" (changeVisibility)="showEditProfile=$event" height=85 width=50>
+    <div class="containerUserProfile" *ngIf="user">
+
+        <div class="row">
+            <h4 class="heading1">Change User Profile</h4>
+        </div>
+        <div class="row lessSpace">
+            <i class="material-icons accountIcon">account_circle</i>
+            <h4 class="heading2">{{user.username}}</h4>
+
+        </div>
+        <form [formGroup]="editUserForm" class="editUser">
+            <div class="row">
+                <div class="col l6">
+                    <label for="firstname" class="labelUserProfile">First Name</label>
+                    <input type="text" id="firstname" class="validate" formControlName="first_name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col l6">
+                    <label for="lastname" class="labelUserProfile">Last Name</label>
+                    <input type="text" id="lastname" class="validate" formControlName="last_name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col l6">
+                    <label for="email" class="labelUserProfile">Email Address</label>
+                    <input type="email" id="email" class="validate" formControlName="email">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <button class="btn waves-effect waves-light cyan darken-2 left" type="submit" name="action" (click)="onSubmitEditUser()">Confirm</button>
+            </div>
+        </form>
+    </div>
+</modal> -->
+
+navbarhtml.txt
